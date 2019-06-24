@@ -1,3 +1,9 @@
 https://www.mkyong.com/spring-boot/spring-boot-webflux-thymeleaf-reactive-example/
-https://viblo.asia/p/khoi-dong-reactive-web-voi-spring-webflux-djeZ1Rb3lWz
-https://dzone.com/articles/spring-webflux-first-steps
+
+Webflux: Security.
+https://medium.com/@ard333/authentication-and-authorization-using-jwt-on-spring-webflux-29b81f813e78
+https://scotch.io/tutorials/build-a-spring-boot-app-with-user-authentication
+
+Firebase:
+https://stackoverflow.com/questions/48047921/react-native-oauth2-firebase-springboot
+http://pscode.rs/firebase-and-spring-boot-integration/
