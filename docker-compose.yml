@@ -1,16 +1,50 @@
 version: '3'
-
 services:
-  # Config to connect PostgreSQL.
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/code
+    expose:
+      - 8000
+    ports:
+      - 8000:8000
+    environment:
+      DATABASE_URL: 'postgres://csf:KBP6WXGPS387090EZMG8@data:5432/quiztest'
+      CACHE_URL: 'postgres://csf:KBP6WXGPS387090EZMG8@data:5432/quiztest'
+    links:
+      - data:data
+      - cache:cache
+      - minio:minio
+
   data:
     image: postgres:11.1-alpine
-    container_name: mama_postgre
     ports:
       - 5432:5432
     environment:
-      POSTGRES_DB: 'mydb'
-      POSTGRES_USER: 'javateam'
-      POSTGRES_PASSWORD: 'Abcd1234'
+      POSTGRES_DB: 'quiztest'
+      POSTGRES_USER: 'csf'
+      POSTGRES_PASSWORD: 'KBP6WXGPS387090EZMG8'
     restart: always
     volumes:
       - ./db_initial.sql:/docker-entrypoint-initdb.d/db_initial.sql
+      - ./.tmp/data:/var/lib/postgresql/data
+
+  cache:
+    image: redis:5.0.3-alpine
+    ports:
+      - 6379:6379
+    restart: always
+
+  minio:
+    image: "minio/minio"
+    command: server /export
+    restart: always
+    environment:
+      MINIO_ACCESS_KEY: KBP6WXGPS387090EZMG8
+      MINIO_SECRET_KEY: DRjFXylyfMqn2zilAr33xORhaYz5r9e8r37XPz3A
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./.minio-data:/export
