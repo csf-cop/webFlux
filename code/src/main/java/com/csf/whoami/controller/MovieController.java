@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.thymeleaf.spring5.context.webflux.IReactiveDataDriverContextVariable;
 import org.thymeleaf.spring5.context.webflux.ReactiveDataDriverContextVariable;
 
-import com.csf.whoami.repository.MovieRepository;
+import com.csf.whoami.repository.MovieService;
 
 /**
  * @author TuanDQ
@@ -21,14 +21,14 @@ import com.csf.whoami.repository.MovieRepository;
 public class MovieController {
 
     @Autowired
-    private MovieRepository movieRepository;
+    private MovieService service;
 
     @RequestMapping("/")
     public String index(final Model model) {
 
         // loads 1 and display 1, stream data, data driven mode.
         IReactiveDataDriverContextVariable reactiveDataDrivenMode =
-                new ReactiveDataDriverContextVariable(movieRepository.findAll(), 1);
+                new ReactiveDataDriverContextVariable(service.getAllMovies(), 1);
 
         model.addAttribute("movies", reactiveDataDrivenMode);
 

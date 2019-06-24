@@ -3,14 +3,15 @@
  */
 package com.csf.whoami.repository;
 
-import com.csf.whoami.dto.Movie;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
 
-import reactor.core.publisher.Flux;
+import com.csf.whoami.dto.Movie;
 
 /**
  * @author TuanDQ
  *
  */
-public interface MovieRepository {
-	Flux<Movie> findAll();
+@Component
+public interface MovieRepository extends JpaRepository<Movie, Long> {
 }
