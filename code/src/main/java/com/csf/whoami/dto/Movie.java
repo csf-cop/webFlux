@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.csf.whoami.controller;
+package com.csf.whoami.dto;
 
 /**
  * @author TuanDQ
