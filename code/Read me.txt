@@ -7,3 +7,7 @@ https://scotch.io/tutorials/build-a-spring-boot-app-with-user-authentication
 Firebase:
 https://stackoverflow.com/questions/48047921/react-native-oauth2-firebase-springboot
 http://pscode.rs/firebase-and-spring-boot-integration/
+https://github.com/savicprvoslav/Spring-Boot-starter
+
+Chat Application.
+https://github.com/AleBarreto/FirebaseAndroidChat

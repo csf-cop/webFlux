@@ -32,6 +32,11 @@ spring:
     reactive:
       max-chunk-size: 8192
 
+  firebase:
+    database:
+      url: https://testfirebaseauth-a18a7.firebaseio.com/
+    config:
+      path: TestFireBaseAuth-c273d57720d5.json
 # Logger configuration
 logging:
   pattern:

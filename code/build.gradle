@@ -29,15 +29,16 @@ dependencies {
 	//implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.postgresql:postgresql:42.2.5'
+    implementation 'com.google.firebase:firebase-server-sdk:3.0.1'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
     compileOnly("org.projectlombok:lombok")
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-	
-	
+
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	//testImplementation 'io.projectreactor:reactor-test'
 	// TODO : After
 	//testImplementation 'org.springframework.security:spring-security-test'
+	
 }
