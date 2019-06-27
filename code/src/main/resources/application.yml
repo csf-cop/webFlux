@@ -56,3 +56,5 @@ server:
 #  user:
 #    name: user
 #    password: user
+
+#album.save.path=/var/www/html/upload
