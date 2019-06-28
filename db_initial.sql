@@ -15,7 +15,7 @@ INSERT INTO TBL_movies("movie_name", "score") VALUES('Glass (2019)', 70);
 CREATE SEQUENCE USERS_SEQ START 1;
 CREATE TABLE TBL_USERS (
     id bigint PRIMARY KEY DEFAULT nextval('USERS_SEQ'),
-    LOGIN_ID varchar(10) NOT NULL,
+    LOGIN_ID varchar(32) NOT NULL,
     USER_PASSWORD varchar(100) NOT NULL,
     FULL_NAME varchar(30),
     PHONE varchar(20),
@@ -27,8 +27,8 @@ CREATE TABLE TBL_USERS (
 CREATE SEQUENCE ROLES_SEQ START 1;
 CREATE TABLE TBL_ROLES (
     id bigint PRIMARY KEY DEFAULT nextval('ROLES_SEQ'),
-    ROLE_CODE varchar(20) NOT NULL,
     ROLE_NAME varchar(100),
+    ROLE_CODE varchar(20) NOT NULL,
     IS_DELETED numeric(2,0) DEFAULT '0'::numeric
 );
 
