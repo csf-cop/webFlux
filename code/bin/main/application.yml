@@ -58,3 +58,7 @@ server:
 #    password: user
 
 #album.save.path=/var/www/html/upload
+
+# JWT configuration.
+jwt:
+  secret: javainuse

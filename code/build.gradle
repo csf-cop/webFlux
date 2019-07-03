@@ -24,15 +24,17 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	// TODO : After
-	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	//implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.postgresql:postgresql:42.2.5'
     // REDIS
-    implementation 'org.springframework.boot:spring-boot-starter-redis:1.4.4.RELEASE'
+    // implementation 'org.springframework.boot:spring-boot-starter-redis:1.4.4.RELEASE'
     // FIREBASE
-    implementation 'com.google.firebase:firebase-server-sdk:3.0.1'
+    // implementation 'com.google.firebase:firebase-server-sdk:3.0.1'
+    
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 

@@ -1,0 +1,60 @@
+# Spring Boot configuration
+spring:
+  profiles:
+    active: development
+
+# Database
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/quiztest
+    username: csf
+    password: KBP6WXGPS387090EZMG8
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 3000
+    validationQuery: SELECT 1
+
+# JPA properties
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+#        physical_naming_strategy: com.csf.whoami.config.RealNamingStrategyImpl
+        default_schema: public
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        # Important properties.
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+  thymeleaf:
+    reactive:
+      max-chunk-size: 8192
+
+  firebase:
+    database:
+      url: https://testfirebaseauth-a18a7.firebaseio.com/
+    config:
+      path: TestFireBaseAuth-c273d57720d5.json
+# Logger configuration
+logging:
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+  level:
+    org.springframework: INFO
+    org.hibernate: DEBUG
+
+# Server configuration
+server:
+  port: 8080
+  sessionTimeout: 30
+
+
+# Security configuration
+#security:
+#  user:
+#    name: user
+#    password: user
+
+#album.save.path=/var/www/html/upload
