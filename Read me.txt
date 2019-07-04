@@ -14,3 +14,9 @@ https://github.com/savicprvoslav/Spring-Boot-starter
 
 Chat Application.
 https://github.com/AleBarreto/FirebaseAndroidChat
+
+
+
+Redis:
+https://kipalog.com/posts/Hu-o--ng-da--n-Spring-Boot---Redis
+Connect DB, Redis and JWT.

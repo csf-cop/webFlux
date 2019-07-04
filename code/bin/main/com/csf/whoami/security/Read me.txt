@@ -1,2 +1,5 @@
-Follow article:
+JWT Follow article:
 https://www.javainuse.com/spring/jwt
+
+Oauth 2.0 and JWT:
+http://blog.marcosbarbero.com/centralized-authorization-jwt-spring-boot2/
