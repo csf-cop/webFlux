@@ -30,11 +30,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.postgresql:postgresql:42.2.5'
     // REDIS
-    // implementation 'org.springframework.boot:spring-boot-starter-redis:1.4.4.RELEASE'
+    //implementation 'org.springframework.boot:spring-boot-starter-redis:1.4.4.RELEASE'
     // FIREBASE
-    // implementation 'com.google.firebase:firebase-server-sdk:3.0.1'
+    //implementation 'com.google.firebase:firebase-server-sdk:3.0.1'
     
-    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    //implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
@@ -42,7 +42,10 @@ dependencies {
 
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// Hibernate
+    compile 'mysql:mysql-connector-java'
+
+	//testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	//testImplementation 'io.projectreactor:reactor-test'
 	// TODO : After
 	//testImplementation 'org.springframework.security:spring-security-test'
