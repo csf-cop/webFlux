@@ -4,14 +4,14 @@ spring:
     active: development
 
 # Database
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/quiztest
-    username: csf
-    password: KBP6WXGPS387090EZMG8
-    testWhileIdle: true
-    timeBetweenEvictionRunsMillis: 3000
-    validationQuery: SELECT 1
+#  datasource:
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://localhost:5432/quiztest
+#    username: csf
+#    password: KBP6WXGPS387090EZMG8
+#    testWhileIdle: true
+#    timeBetweenEvictionRunsMillis: 3000
+#    validationQuery: SELECT 1
 
 # JPA properties
   jpa:
@@ -31,12 +31,8 @@ spring:
   thymeleaf:
     reactive:
       max-chunk-size: 8192
+    cache: false
 
-  firebase:
-    database:
-      url: https://testfirebaseauth-a18a7.firebaseio.com/
-    config:
-      path: TestFireBaseAuth-c273d57720d5.json
 # Logger configuration
 logging:
   pattern:
@@ -47,9 +43,7 @@ logging:
 
 # Server configuration
 server:
-  port: 8080
-  sessionTimeout: 30
-
+  port: 8082
 
 # Security configuration
 #security:
@@ -60,5 +54,19 @@ server:
 #album.save.path=/var/www/html/upload
 
 # JWT configuration.
-jwt:
-  secret: javainuse
+#jwt:
+#  secret: javainuse
+
+
+
+security:
+  oauth2:
+    client:
+      clientId: ClientId
+      clientSecret: secret
+      accessTokenUri: http://localhost:8081/auth/oauth/token
+      userAuthorizationUri: http://localhost:8081/auth/oauth/authorize
+    resource:
+      userInfoUri: http://localhost:8081/auth/rest/hello/principal
+  basic:
+    enable: false
