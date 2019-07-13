@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.csf.whoami.security.custome.TokenUtils;
 import com.csf.whoami.security.model.Welcome;
 
 import java.security.Principal;
@@ -26,6 +27,6 @@ public class HelloController {
     @ResponseStatus(HttpStatus.OK)
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public Welcome greetings(@RequestParam("name") String name, Principal principal) {
-        return new Welcome(name + " (" + principal.getName() + ")");
+        return new Welcome(name + " (" + principal.getName() + ")" + TokenUtils.extractCurrentToken());
     }
 }

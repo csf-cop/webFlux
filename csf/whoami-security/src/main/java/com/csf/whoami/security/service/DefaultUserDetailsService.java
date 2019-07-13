@@ -1,16 +1,16 @@
 package com.csf.whoami.security.service;
 
-import com.csf.whoami.security.entity.AppUser;
-import com.csf.whoami.security.repository.AppUserRepository;
+import java.util.Collections;
+import java.util.Optional;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.Collections;
-import java.util.Optional;
+import com.csf.whoami.security.entity.AppUser;
+import com.csf.whoami.security.entity.UserInfo;
+import com.csf.whoami.security.repository.AppUserRepository;
 
 public class DefaultUserDetailsService implements UserDetailsService {
 
@@ -28,12 +28,22 @@ public class DefaultUserDetailsService implements UserDetailsService {
         if (userEntity.isPresent()) {
             final AppUser appUser = userEntity.get();
 
-            return new User(appUser.getUserEmail(),
+            UserInfo info = new UserInfo(appUser.getUserEmail(),
                     passwordNoEncoding(appUser),
                     Collections.singletonList(new SimpleGrantedAuthority(appUser.getUserRole())));
+            info.setUserRole(appUser.getUserRole());
+
+            return info;
         }
 
-        return null;
+        // TODO: Test new User
+        AppUser appUser = new AppUser();
+        UserInfo info = new UserInfo("PC-user", passwordNoEncoding(appUser),
+                Collections.singletonList(new SimpleGrantedAuthority("Anonymous")));
+        info.setUserRole("Anonymous");
+        return info;
+
+        //return null;
     }
 
     private String passwordNoEncoding(AppUser appUser) {

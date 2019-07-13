@@ -43,7 +43,7 @@ logging:
 
 # Server configuration
 server:
-  port: 8082
+  port: 8888
 
 # Security configuration
 #security:
