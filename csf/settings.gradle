@@ -5,6 +5,7 @@ pluginManagement {
 }
 //rootProject.name = 'csf'
 
+include 'whoami'
 include 'whoami-security'
 include 'whoami-common'
 

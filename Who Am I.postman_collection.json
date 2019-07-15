@@ -13,12 +13,12 @@
 					"basic": [
 						{
 							"key": "password",
-							"value": "my-secret",
+							"value": "whoami-secret",
 							"type": "string"
 						},
 						{
 							"key": "username",
-							"value": "my-client",
+							"value": "whoami-client",
 							"type": "string"
 						}
 					]
@@ -67,13 +67,13 @@
 					"type": "basic",
 					"basic": [
 						{
-							"key": "password",
-							"value": "whoami-secret",
+							"key": "username",
+							"value": "whoami-client",
 							"type": "string"
 						},
 						{
-							"key": "username",
-							"value": "whoami-client",
+							"key": "password",
+							"value": "whoami-secret",
 							"type": "string"
 						}
 					]
@@ -106,6 +106,52 @@
 							"type": "text"
 						}
 					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/oauth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[USER]_Get token with no param.",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "whoami-secret",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "whoami-client",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
 				},
 				"url": {
 					"raw": "http://localhost:8080/oauth/token",
@@ -171,7 +217,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "a0341cb7-b818-4429-9f20-0d2a140a19f1",
+							"value": "73b0abac-2ba5-4cff-b302-848c9cfa52f4",
 							"type": "string"
 						}
 					]
@@ -245,12 +291,12 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "my-client",
+							"value": "whoami-client",
 							"type": "string"
 						},
 						{
 							"key": "password",
-							"value": "my-secret",
+							"value": "whoami-secret",
 							"type": "string"
 						}
 					]
