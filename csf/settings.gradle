@@ -1,0 +1,13 @@
+pluginManagement {
+	repositories {
+		gradlePluginPortal()
+	}
+}
+//rootProject.name = 'csf'
+
+include 'whoami'
+include 'whoami-security'
+include 'whoami-common'
+
+include 'service-center'
+include 'csf-database'
