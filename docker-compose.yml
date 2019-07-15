@@ -7,58 +7,68 @@ services:
     ports:
       - 80:80
       - 443:443
-    volumes:
+    #volumes:
       # - ./nginx/conf.d:/etc/nginx/conf.d
       # - /var/run/docker.sock:/tmp/docker.sock:ro
     depends_on:
       - app
-    links:
-      - tomcat
+  #  links:
+  #    - tomcat
  
-  mysql:
-    container_name: docker-mysql
-    image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: nimda
-      MYSQL_DATABASE: example_db
-      MYSQL_USER: example_db_user
-      MYSQL_PASSWORD: example_db_pass
-    ports:
-      - "3306:3306"
-    volumes:
-        - ./docker/db:/docker-entrypoint-initdb.d
-    restart: always
+  #mysql:
+  #  container_name: docker-mysql
+  #  image: mysql:5.7
+  #  environment:
+  #    MYSQL_ROOT_PASSWORD: nimda
+  #    MYSQL_DATABASE: example_db
+  #    MYSQL_USER: example_db_user
+  #    MYSQL_PASSWORD: example_db_pass
+  #  ports:
+  #    - "3306:3306"
+  #  volumes:
+  #      - ./docker/db:/docker-entrypoint-initdb.d
+  #  restart: always
   
   app:
     restart: always
     build: ./app
     working_dir: /app
-    volumes:
+    #volumes:
       # - ./app:/app
       # - ~/.m2:/root/.m2
     expose:
       - "8080"
     # command: mvn clean spring-boot:run
     depends_on:
-      - mysql
+  #    - mysql
+      - redis
+  
+  redis:
+      container_name: docker-redis
+      image: redis:5.0.3-alpine
+      restart: always
+      environment:
+        - ALLOW_EMPTY_PASSWORD=yes
+      ports:
+        - '6379:6379'
 
   # First node of the first Tomcat virtual host.
-  tomcat:
-    image: tomcat:8.5.35
-    container_name: docker-tomcat
-    ports:
-      - "8080:8080"
+  #tomcat:
+  #  image: tomcat:8.5.35
+  #  container_name: docker-tomcat
+  #  ports:
+  #    - "8080:8080"
     # Environment variables do not appear to be getting loaded the first time Tomcat starts!
-    environment:
-      VIRTUAL_HOST: tomcat_1.mulligan.ie
-      VIRTUAL_PORT: 8080
-      JDBC_URL: jdbc:mysql://db:3306/example_db?connectTimeout=0&amp;socketTimeout=0&amp;autoReconnect=true
-      JDBC_USER: example_db_user
-      JDBC_PASS: example_db_pass
+  #  environment:
+  #    VIRTUAL_HOST: tomcat_1.mulligan.ie
+  #    VIRTUAL_PORT: 8080
+  #    JDBC_URL: jdbc:mysql://db:3306/example_db?connectTimeout=0&amp;socketTimeout=0&amp;autoReconnect=true
+  #    JDBC_USER: example_db_user
+  #    JDBC_PASS: example_db_pass
     # volumes:
       # - ./docker/tomcat/webapps:/usr/local/tomcat/webapps
       # - ./docker/tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
       # - ./docker/tomcat/context.xml:/usr/local/tomcat/webapps/manager/META-INF/context.xml
       # - ./docker/tomcat/context.xml:/usr/local/tomcat/webapps/host-manager/META-INF/context.xml
-    links:
-      - mysql
+  #  links:
+  #    - mysql

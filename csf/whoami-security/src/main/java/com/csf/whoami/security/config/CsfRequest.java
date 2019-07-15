@@ -6,7 +6,6 @@ package com.csf.whoami.security.config;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -17,13 +16,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.stereotype.Component;
-
 /**
  * @author tuan
  *
  */
-@Component
+//@Component
 public class CsfRequest implements Filter {
 	@Override
 	public void destroy() {
@@ -39,18 +36,18 @@ public class CsfRequest implements Filter {
 		// Get username & password : basic
 		final String authorization = request.getHeader("Authorization");
 		if (authorization != null && authorization.toLowerCase().startsWith("basic")) {
-			String message = checkBasicAuthentication(request, authorization);
-			if (message != null) {
-				// fail username & password.
-				// can not connect to login account.
-				// Invalis username & password. - Empty || null
-			} else {
-				// Case have no body.
-				Map<String, String[]> headers = request.getParameterMap();
-				for (Map.Entry<String, String[]> entry : headers.entrySet()) {
-					System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
-				}
-			}
+//			String message = checkBasicAuthentication(request, authorization);
+//			if (message != null) {
+//				// fail username & password.
+//				// can not connect to login account.
+//				// Invalis username & password. - Empty || null
+//			} else {
+//				// Case have no body.
+//				Map<String, String[]> headers = request.getParameterMap();
+//				for (Map.Entry<String, String[]> entry : headers.entrySet()) {
+//					System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
+//				}
+//			}
 		} else if (authorization == null) {
 			// Setting default authenticate (basic token).
 		}
