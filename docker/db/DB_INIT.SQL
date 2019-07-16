@@ -1,17 +1,28 @@
-CREATE DATABASE `my-test-app`;
-USE my-test-app;
+USE example_db;
 
-CREATE TABLE EMPLOYEE (
-  EMPLOYEE_ID BIGINT(20) NOT NULL AUTO_INCREMENT,
-  NAME VARCHAR(65) NOT NULL,
-  DOB DATETIME DEFAULT NULL,
-  GENDER VARCHAR(10) NOT NULL,
-  MOBILE VARCHAR(65) DEFAULT NULL,
-  EMAIL VARCHAR(60) DEFAULT NULL,
-  PRIMARY KEY (EMPLOYEE_ID)
-) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
+CREATE TABLE oauth_access_token (
+  authentication_id VARCHAR(256) NOT NULL,
+  token_id VARCHAR(256) NOT NULL,
+  token byte,
+  user_name VARCHAR(256) DEFAULT NULL,
+  client_id VARCHAR(256) DEFAULT NULL,
+  authentication byte,
+  refresh_token VARCHAR(256) DEFAULT NULL,
+  PRIMARY KEY (authentication_id)
+);
 
+CREATE TABLE oauth_refresh_token (
+  token_id VARCHAR(256) NOT NULL,
+  token byte,
+  authentication byte
+);
 
-INSERT INTO EMPLOYEE (NAME, DOB, GENDER, MOBILE, EMAIL) VALUES ("Zaw Than Oo", '1986-12-02', 'MALE', '09420000773', 'zawthanoo@cycdemo.com');
-INSERT INTO EMPLOYEE (NAME, DOB, GENDER, MOBILE, EMAIL) VALUES ("Myo Thiha Kyaw", '1990-10-25', 'MALE', '0942568971', 'mthk@cycdemo.com');
-INSERT INTO EMPLOYEE (NAME, DOB, GENDER, MOBILE, EMAIL) VALUES ("Htet Wai Yan Kyaw", '1991-12-15', 'MALE', '0942025023', 'hwyk@cycdemo.com');
+CREATE TABLE tbl_user (
+  user_email VARCHAR(256) NOT NULL,
+  user_pass VARCHAR(256) NOT NULL,
+  user_role VARCHAR(256) NOT NULL,
+  PRIMARY KEY (user_email)
+);
+
+INSERT INTO tbl_user (user_email, user_pass, user_role) VALUES ("admin1@pm.com", "admin123", "ROLE_ADMIN");
+INSERT INTO tbl_user (user_email, user_pass, user_role) VALUES ("user1@pm.com", "user123", "ROLE_USER");

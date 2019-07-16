@@ -12,6 +12,7 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'war'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
@@ -36,8 +37,8 @@ dependencies {
     runtimeOnly('org.liquibase:liquibase-core')
     //implementation('com.amazonaws.secretsmanager:aws-secretsmanager-jdbc:1.0.2')
     compile  'org.springframework.boot:spring-boot-starter-redis:1.2.0.RELEASE'
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
-    testImplementation('org.springframework.security:spring-security-test')
+    //testImplementation('org.springframework.boot:spring-boot-starter-test')
+    //testImplementation('org.springframework.security:spring-security-test')
     compileOnly("org.projectlombok:lombok")
 }
 
