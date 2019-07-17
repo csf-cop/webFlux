@@ -18,10 +18,6 @@ allprojects {
 }
 
 subprojects {
-  //apply plugin: 'findbugs'
-  //findbugs {
-      //ignoreFailures = true
-  //}
 }
 
 subprojects {

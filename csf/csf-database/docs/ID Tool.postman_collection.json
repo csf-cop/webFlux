@@ -1,0 +1,778 @@
+{
+	"info": {
+		"_postman_id": "a2ee26c3-6449-4714-97e8-e75b1a7c62b4",
+		"name": "ID Tool",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/getMyMeetingLogs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}/getMyMeetingLogs?userId=ZKXXV1&keyword=Meeting&startDate=2000-10-31T01:30:00.000-05:00&endDate=2018-10-31T01:30:00.000-05:00&pageIndex=1&pageNo=30&sortBy=sessionID",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"getMyMeetingLogs"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "ZKXXV1"
+						},
+						{
+							"key": "keyword",
+							"value": "Meeting"
+						},
+						{
+							"key": "startDate",
+							"value": "2000-10-31T01:30:00.000-05:00"
+						},
+						{
+							"key": "endDate",
+							"value": "2018-10-31T01:30:00.000-05:00"
+						},
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageNo",
+							"value": "30"
+						},
+						{
+							"key": "sortBy",
+							"value": "sessionID"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getAllMeetingLogs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}/getAllMeetingLogs?pageIndex=1&pageNo=15&sortBy=endDate&sortOrder=ASC",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"getAllMeetingLogs"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageNo",
+							"value": "15"
+						},
+						{
+							"key": "sortBy",
+							"value": "endDate"
+						},
+						{
+							"key": "sortOrder",
+							"value": "ASC"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getMyReportersLogs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}/getMyReportersLogs?userId=zkxxv1&keyword=Meeting&startDate=2000-10-31T01:30:00.000-05:00&endDate=2018-10-31T01:30:00.000-05:00&pageIndex=1&pageNo=20&sortBy=sessionID",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"getMyReportersLogs"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "zkxxv1"
+						},
+						{
+							"key": "keyword",
+							"value": "Meeting"
+						},
+						{
+							"key": "startDate",
+							"value": "2000-10-31T01:30:00.000-05:00"
+						},
+						{
+							"key": "endDate",
+							"value": "2018-10-31T01:30:00.000-05:00"
+						},
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageNo",
+							"value": "20"
+						},
+						{
+							"key": "sortBy",
+							"value": "sessionID"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getAttendanceLogs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}/getAttendanceLogs?userId=zkxxv1&keyword=Meeting,test&startDate=2000-10-31T01:30:00.000-05:00&endDate=2018-10-31T01:30:00.000-05:00&pageIndex=1&pageNo=2&sortBy=sessionID",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"getAttendanceLogs"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "zkxxv1"
+						},
+						{
+							"key": "keyword",
+							"value": "Meeting,test"
+						},
+						{
+							"key": "startDate",
+							"value": "2000-10-31T01:30:00.000-05:00"
+						},
+						{
+							"key": "endDate",
+							"value": "2018-10-31T01:30:00.000-05:00"
+						},
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageNo",
+							"value": "2"
+						},
+						{
+							"key": "sortBy",
+							"value": "sessionID"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getMeetingAttendees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}/getMeetingAttendees?sessionId=2",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"getMeetingAttendees"
+					],
+					"query": [
+						{
+							"key": "sessionId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getActionItems",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}/getActionItems?type=All&keyword=xxx&startDate=2000-10-31T01:30:00.000-05:00&endDate=2018-10-31T01:30:00.000-05:00&pageIndex=1&pageNo=20&sortBy=title",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"getActionItems"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "All"
+						},
+						{
+							"key": "keyword",
+							"value": "xxx"
+						},
+						{
+							"key": "startDate",
+							"value": "2000-10-31T01:30:00.000-05:00"
+						},
+						{
+							"key": "endDate",
+							"value": "2018-10-31T01:30:00.000-05:00"
+						},
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageNo",
+							"value": "20"
+						},
+						{
+							"key": "sortBy",
+							"value": "title"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getGeneralActionItemTemplate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}/getGeneralActionItemTemplate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"getGeneralActionItemTemplate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getMyReporters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL}}/getMyReporters?userId=jdxxsn",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"getMyReporters"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "jdxxsn"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/createActionItem",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"title 1\",\n\t\"type\": \"PHA\",\n\t\"generalActionItemId\": 1,\n\t\"recommendation\": \"recommendation 1\",\n\t\"safeStart\": \"safeStart 1\",\n\t\"dueDate\": \"2018-04-20T01:30:00.000-05:00\",\n\t\"cause\": \"cause 1\",\n\t\"processSafetyElement\": \"processSafetyElement 1\",\n\t\"assignees\": [\n\t\t\"assignee1\",\n\t\t\"assignee2\"\n\t],\n\t\"mocNum\": \"mocNum 1\",\n\t\"cemAssociatedPlan\": \"cemAssociatedPlan 1\",\n\t\"cemConcerns\": \"cemConcerns 1\",\n\t\"logBy\": \"zkxxv1\",\n\t\"logDate\": \"2018-05-01\"\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/createActionItem",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"createActionItem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/updateActionItem",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 1,\n\t\"completedDate\": \"2018-04-20T01:30:00.000-05:00\",\n\t\"dueDate\": \"2018-04-21T01:30:00.000-05:00\",\n\t\"completer\": [\"completer1\"],\n\t\"status\": \"Completed\",\n\t\"comment\": \"abc\"\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/updateActionItem",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"updateActionItem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getLotos - All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 1,\n\t\"completedDate\": \"2018-04-20T01:30:00.000-05:00\",\n\t\"dueDate\": \"2018-04-21T01:30:00.000-05:00\",\n\t\"completer\": \"completer1\"\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/getLotos?keyword=t&startDate=1800-01-01T00:00:00.000-00:00&endDate=2018-10-31T01:30:00.000-05:00&pageIndex=1&pageNo=10&type=All",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"getLotos"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "t"
+						},
+						{
+							"key": "startDate",
+							"value": "1800-01-01T00:00:00.000-00:00"
+						},
+						{
+							"key": "endDate",
+							"value": "2018-10-31T01:30:00.000-05:00"
+						},
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageNo",
+							"value": "10"
+						},
+						{
+							"key": "type",
+							"value": "All"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getLotos - Current",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 1,\n\t\"completedDate\": \"2018-04-20T01:30:00.000-05:00\",\n\t\"dueDate\": \"2018-04-21T01:30:00.000-05:00\",\n\t\"completer\": \"completer1\"\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/getLotos?keyword=t&startDate=1800-01-01T00:00:00.000-00:00&endDate=2018-10-31T01:30:00.000-05:00&pageIndex=1&pageNo=10&type=Current",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"getLotos"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "t"
+						},
+						{
+							"key": "startDate",
+							"value": "1800-01-01T00:00:00.000-00:00"
+						},
+						{
+							"key": "endDate",
+							"value": "2018-10-31T01:30:00.000-05:00"
+						},
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageNo",
+							"value": "10"
+						},
+						{
+							"key": "type",
+							"value": "Current"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getLotos - Historical",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 1,\n\t\"completedDate\": \"2018-04-20T01:30:00.000-05:00\",\n\t\"dueDate\": \"2018-04-21T01:30:00.000-05:00\",\n\t\"completer\": \"completer1\"\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/getLotos?keyword=xxx&startDate=1800-01-01T00:00:00.000%2B00:00&endDate=2018-10-31T01:30:00.000-05:00&pageIndex=1&pageNo=10&type=Historical",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"getLotos"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "xxx"
+						},
+						{
+							"key": "startDate",
+							"value": "1800-01-01T00:00:00.000%2B00:00"
+						},
+						{
+							"key": "endDate",
+							"value": "2018-10-31T01:30:00.000-05:00"
+						},
+						{
+							"key": "pageIndex",
+							"value": "1"
+						},
+						{
+							"key": "pageNo",
+							"value": "10"
+						},
+						{
+							"key": "type",
+							"value": "Historical"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getGroupLists",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 1,\n\t\"completedDate\": \"2018-04-20T01:30:00.000-05:00\",\n\t\"dueDate\": \"2018-04-21T01:30:00.000-05:00\",\n\t\"completer\": \"completer1\"\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/getGroupLists",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"getGroupLists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getLocations",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 1,\n\t\"completedDate\": \"2018-04-20T01:30:00.000-05:00\",\n\t\"dueDate\": \"2018-04-21T01:30:00.000-05:00\",\n\t\"completer\": \"completer1\"\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/getLocations?group=EH",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"getLocations"
+					],
+					"query": [
+						{
+							"key": "group",
+							"value": "EH"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getUsers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 1,\n\t\"completedDate\": \"2018-04-20T01:30:00.000-05:00\",\n\t\"dueDate\": \"2018-04-21T01:30:00.000-05:00\",\n\t\"completer\": \"completer1\"\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/getUsers",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"getUsers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getLoToOperators",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 1,\n\t\"completedDate\": \"2018-04-20T01:30:00.000-05:00\",\n\t\"dueDate\": \"2018-04-21T01:30:00.000-05:00\",\n\t\"completer\": \"completer1\"\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/getLoToOperators",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"getLoToOperators"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/upsertLoTo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"groupId\": 1,\n\t\"groupName\": \"IOC\",\n\t\"location\": \"location 1\",\n\t\"lotoDate\": \"2018-04-25T01:30:00.000-05:00\",\n\t\"lotoReason\": \"reason 1\",\n\t\"lotoOperator\": \"ZSXXF1\",\n\t\"lotoRemovedDate\": null,\n\t\"lotoRemovedBy\": null\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/upsertLoTo",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"upsertLoTo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/upsertLoTo",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 2,\n\t\"lotoRemovedDate\": \"2018-04-29T01:30:00.000-05:00\",\n\t\"lotoRemovedBy\": \"removedBy1\"\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/upsertLoTo",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"upsertLoTo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/export?type=MeetingLog",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 2,\n\t\"lotoRemoved\": \"2018-04-29T01:30:00.000-05:00\"\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/export?type=MeetingLog",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"export"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "MeetingLog"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/export?type=ActionItem",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 2,\n\t\"lotoRemoved\": \"2018-04-29T01:30:00.000-05:00\"\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/export?type=ActionItem",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"export"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "ActionItem"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/export?type=LOTO",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 2,\n\t\"lotoRemoved\": \"2018-04-29T01:30:00.000-05:00\"\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/export?type=LOTO",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"export"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "LOTO"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
