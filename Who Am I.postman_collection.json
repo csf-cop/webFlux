@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4aad0278-5e44-4cc3-9372-bb43ae09c9da",
+		"_postman_id": "4e62ea1e-6254-4ed9-ab31-0101f42220e4",
 		"name": "Who Am I",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -46,10 +46,11 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8080/oauth/token",
+					"raw": "http://whoami.website:8080/oauth/token",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"whoami",
+						"website"
 					],
 					"port": "8080",
 					"path": [
@@ -108,12 +109,12 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8080/oauth/token",
+					"raw": "http://localhost:8899/oauth/token",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8899",
 					"path": [
 						"oauth",
 						"token"
@@ -123,46 +124,28 @@
 			"response": []
 		},
 		{
-			"name": "[USER]_Get token with no param.",
+			"name": "[Anonymous]_Access hello page",
 			"request": {
 				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "whoami-secret",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "whoami-client",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "formdata",
 					"formdata": []
 				},
 				"url": {
-					"raw": "http://localhost:8080/oauth/token",
+					"raw": "http://localhos:8080/api/hello/",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"localhos"
 					],
 					"port": "8080",
 					"path": [
-						"oauth",
-						"token"
+						"api",
+						"hello",
+						""
 					]
 				}
 			},
@@ -217,7 +200,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "73b0abac-2ba5-4cff-b302-848c9cfa52f4",
+							"value": "5c348b85-64cf-4bef-9c23-dc5c4c01a315",
 							"type": "string"
 						}
 					]
@@ -229,12 +212,12 @@
 					"formdata": []
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/hello?name=Sebastian",
+					"raw": "http://localhost:8899/api/hello?name=Sebastian",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8899",
 					"path": [
 						"api",
 						"hello"
@@ -244,6 +227,37 @@
 							"key": "name",
 							"value": "Sebastian"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ANONYMOUS]_Test content",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:8899/api/hello/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8899",
+					"path": [
+						"api",
+						"hello",
+						"test"
 					]
 				}
 			},
@@ -269,13 +283,15 @@
 					"formdata": []
 				},
 				"url": {
-					"raw": "http://localhost:8080/oauth/revoke",
-					"protocol": "http",
+					"raw": "http:///whoami.website:8080/oauth/revoke",
 					"host": [
-						"localhost"
+						"http:"
 					],
-					"port": "8080",
+					"port": "",
 					"path": [
+						"",
+						"",
+						"whoami.website:8080",
 						"oauth",
 						"revoke"
 					]
@@ -320,19 +336,21 @@
 						},
 						{
 							"key": "refresh_token",
-							"value": "f916036f-a91c-4049-8b7c-be292148591b",
+							"value": "8369945d-2d7d-498c-8912-7c6f41ab8059",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8080/oauth/token",
-					"protocol": "http",
+					"raw": "http:///whoami.website:8080/oauth/token",
 					"host": [
-						"localhost"
+						"http:"
 					],
-					"port": "8080",
+					"port": "",
 					"path": [
+						"",
+						"",
+						"whoami.website:8080",
 						"oauth",
 						"token"
 					]
