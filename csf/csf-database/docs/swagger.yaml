@@ -1,0 +1,1184 @@
+swagger: "2.0"
+info:
+  description: "The Rest API about Operation Center - ID Tool "
+  version: "1.0.0"
+  title: "API"
+host: "localhost:4000"
+tags:
+- name: "MeetingLogs"
+  description: "Everything about the Meeting Logs"
+- name: "ActionItems"
+  description: "Every thing about the Action Items"
+- name: "Lotos"
+  description: "Every thing about the Lotos"
+- name: "General Operation"
+  description: "The general operation"
+schemes:
+- "http"
+- "https"
+security:
+  - APIKeyHeader: []
+paths:
+  /getMyMeetingLogs:
+    get:
+      tags:
+        - "MeetingLogs"
+      summary: "Get meeting logs hosted by me"
+      description: "Get meeting logs hosted by me"
+      parameters:
+        - in: query
+          name: keyword
+          type: array
+          items:
+            type: string
+          description: "the filter's keywords"
+        - in: query
+          name: startDate
+          type: string
+          description: "the start date filter"
+        - in: query
+          name: endDate
+          type: string
+          description: "the end date filter"
+        - in: query
+          name: userId
+          type: string
+          description: "my user id"
+        - in: query
+          name: pageIndex
+          type: integer
+          required: true
+          description: "The page number"
+        - in: query
+          name: pageNo
+          type: integer
+          required: true
+          description: "The records contained in one page"
+        - in: query
+          name: sortBy
+          type: string
+          required: true
+          description: "The column used to be sorted on server side"
+        - in: query
+          name: sortOrder
+          type: string
+          default: "ASC"
+          enum:
+            - ASC
+            - DESC
+          description: "The sorting order"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: object
+            properties:
+              total:
+                type: number
+              rows:
+                type: array
+                items:
+                  $ref: "#/definitions/MeetingLog"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Authorization Info is missing or invalid"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "The operation is not allowed"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+  /getAllMeetingLogs:
+    get:
+      tags:
+        - "MeetingLogs"
+      summary: "Get all the meeting logs"
+      description: "Get all the meeting logs"
+      parameters:
+        - in: query
+          name: keyword
+          type: array
+          items:
+            type: string
+          description: "the filter's keywords"
+        - in: query
+          name: startDate
+          type: string
+          description: "the start date filter"
+        - in: query
+          name: endDate
+          type: string
+          description: "the end date filter"
+        - in: query
+          name: pageIndex
+          type: integer
+          required: true
+          description: "The page number"
+        - in: query
+          name: pageNo
+          type: integer
+          required: true
+          description: "The records contained in one page"
+        - in: query
+          name: sortBy
+          type: string
+          required: true
+          description: "The column used to be sorted on server side"
+        - in: query
+          name: sortOrder
+          type: string
+          default: "ASC"
+          enum:
+            - ASC
+            - DESC
+          description: "The sorting order"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: object
+            properties:
+              total:
+                type: number
+              rows:
+                type: array
+                items:
+                  $ref: "#/definitions/MeetingLog"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Authorization Info is missing or invalid"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "The operation is not allowed"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+  /getMyReportersLogs:
+    get:
+      tags:
+        - "MeetingLogs"
+      summary: "Get all the meeting logs about my reportees"
+      description: "Get all the meeting logs about my reportees"
+      parameters:
+        - in: query
+          name: keyword
+          type: array
+          items:
+            type: string
+          description: "the filter's keywords"
+        - in: query
+          name: startDate
+          type: string
+          description: "the start date filter"
+        - in: query
+          name: endDate
+          type: string
+          description: "the end date filter"
+        - in: query
+          name: userId
+          type: string
+          required: true
+          description: "my user id"
+        - in: query
+          name: pageIndex
+          type: integer
+          required: true
+          description: "The page number"
+        - in: query
+          name: pageNo
+          type: integer
+          required: true
+          description: "The records contained in one page"
+        - in: query
+          name: sortBy
+          type: string
+          required: true
+          description: "The column used to be sorted on server side"
+        - in: query
+          name: sortOrder
+          type: string
+          default: "ASC"
+          enum:
+            - ASC
+            - DESC
+          description: "The sorting order"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: object
+            properties:
+              total:
+                type: number
+              rows:
+                type: array
+                items:
+                  $ref: "#/definitions/MeetingLog"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Authorization Info is missing or invalid"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "The operation is not allowed"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+  /getAttendanceLogs:
+    get:
+      tags:
+        - "MeetingLogs"
+      summary: "Get all the meeting logs that my reportees attend"
+      description: "Get all the meeting logs that my reportees attend"
+      parameters:
+        - in: query
+          name: keyword
+          type: array
+          items:
+            type: string
+          description: "the filter's keywords"
+        - in: query
+          name: startDate
+          type: string
+          description: "the start date filter"
+        - in: query
+          name: endDate
+          type: string
+          description: "the end date filter"
+        - in: query
+          name: userId
+          type: string
+          required: true
+          description: "my user id"
+        - in: query
+          name: pageIndex
+          type: integer
+          required: true
+          description: "The page number"
+        - in: query
+          name: pageNo
+          type: integer
+          required: true
+          description: "The records contained in one page"
+        - in: query
+          name: sortBy
+          type: string
+          required: true
+          description: "The column used to be sorted on server side"
+        - in: query
+          name: sortOrder
+          type: string
+          default: "ASC"
+          enum:
+            - ASC
+            - DESC
+          description: "The sorting order"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: object
+            properties:
+              total:
+                type: number
+              rows:
+                type: array
+                items:
+                  $ref: "#/definitions/MeetingLog"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Authorization Info is missing or invalid"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "The operation is not allowed"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+
+  /getMeetingAttendees:
+      get:
+        tags:
+          - "MeetingLogs"
+        summary: "Get the attendees info of a session"
+        description: "Get the attendees info of a session"
+        parameters:
+          - in: query
+            name: sessionId
+            type: integer
+            required: true
+            description: "The session's ID"
+        responses:
+          200:
+            description: "OK"
+            schema:
+              type: object
+              properties:
+                total:
+                  type: number
+                rows:
+                  type: array
+                  items:
+                    $ref: "#/definitions/Attendee"
+          400:
+            description: "Bad Request"
+            schema:
+              $ref: "#/definitions/Error"
+          401:
+            description: "Authorization Info is missing or invalid"
+            schema:
+              $ref: "#/definitions/Error"
+          403:
+            description: "The operation is not allowed"
+            schema:
+              $ref: "#/definitions/Error"
+          500:
+            description: "Internal Server Error"
+            schema:
+              $ref: "#/definitions/Error"
+  /getActionItems:
+    get:
+      tags:
+        - "ActionItems"
+      summary: "Get the corresponding action items"
+      description: "Get the corresponding action items"
+      parameters:
+        - in: query
+          name: keyword
+          type: array
+          items:
+            type: string
+          description: "the filter's keywords"
+        - in: query
+          name: startDate
+          type: string
+          description: "the start date filter"
+        - in: query
+          name: endDate
+          type: string
+          description: "the end date filter"
+        - in: query
+          name: type
+          type: string
+          default: 'All'
+          enum:
+            - All
+            - PHA
+            - PSSR
+            - Cause Map
+            - CEM
+            - Incident Review
+            - PSM Audit
+            - General
+          required: true
+          description: "The type of the action item"
+        - in: query
+          name: pageIndex
+          type: integer
+          required: true
+          description: "The page number"
+        - in: query
+          name: pageNo
+          type: integer
+          required: true
+          description: "The records contained in one page"
+        - in: query
+          name: sortBy
+          type: string
+          required: true
+          description: "The column used to be sorted on server side"
+        - in: query
+          name: sortOrder
+          type: string
+          default: "ASC"
+          enum:
+            - ASC
+            - DESC
+          description: "The sorting order"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: object
+            properties:
+              total:
+                type: number
+              rows:
+                type: array
+                items:
+                  $ref: "#/definitions/ActionItem"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Authorization Info is missing or invalid"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "The operation is not allowed"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+
+  /getGeneralActionItemTemplate:
+    get:
+      tags:
+        - "ActionItems"
+      summary: "Get the action item template list"
+      description: Get the action item template list
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: object
+            properties:
+              total:
+                type: number
+              rows:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Authorization Info is missing or invalid"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "The operation is not allowed"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+  /getMyReporters:
+    get:
+      tags:
+        - "ActionItems"
+      summary: "Get the user who reports to me directly and indirectly"
+      description: Get the user who reports to me directly and indirectly
+      parameters:
+        - in: query
+          name: userId
+          type: string
+          required: true
+          description: my user id
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: object
+            properties:
+              total:
+                type: number
+              rows:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Authorization Info is missing or invalid"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "The operation is not allowed"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+  /createActionItem:
+    post:
+      tags:
+        - "ActionItems"
+      summary: "Create an action item"
+      description: "Create an action item"
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: actionItem
+          description: "the info about the actionItem to be created"
+          schema:
+            type: object
+            required:
+              - title
+              - type
+              - recommendation
+              - dueDate
+              - assignees
+              - mocNum
+              - logBy
+              - logDate
+            properties:
+              title:
+                type: string
+              type:
+                type: string
+              generalActionItemId:
+                type: integer
+              recommendation:
+                type: string
+              safeStart:
+                type: string
+              dueDate:
+                type: string
+              cause:
+                type: string
+              processSafetyElement:
+                type: string
+              assignees:
+                type: array
+                items:
+                  type: string
+              mocNum:
+                type: string
+              cemAssociatedPlan:
+                type: string
+              cemConcerns:
+                type: string
+              logBy:
+                type: string
+              logDate:
+                type: string
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Authorization Info is missing or invalid"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "The operation is not allowed"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+
+  /updateActionItem:
+    post:
+      tags:
+        - "ActionItems"
+      summary: "Update an action item"
+      description: "Update an action item"
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: updatedActionItem
+          description: "the info about the actionItem to be created"
+          schema:
+            type: object
+            required:
+              - id
+              - completedDate
+              - dueDate
+              - completer
+            properties:
+              id:
+                type: integer
+              completedDate:
+                type: string
+              dueDate:
+                type: string
+              completer:
+                type: string
+              status:
+                type: string
+              comment:
+                type: string
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Authorization Info is missing or invalid"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "The operation is not allowed"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+
+  /getLotos:
+    get:
+      tags:
+        - "Lotos"
+      summary: "get all the lotos"
+      description: "get all the lotos"
+      parameters:
+        - in: query
+          name: keyword
+          type: array
+          items:
+            type: string
+          description: "the filter's keywords"
+        - in: query
+          name: startDate
+          type: string
+          description: "the start date filter"
+        - in: query
+          name: endDate
+          type: string
+          description: "the end date filter"
+        - in: query
+          name: type
+          type: string
+          default: 'All'
+          enum:
+            - All
+            - Current
+            - Historical
+          required: true
+          description: "the type of lotos"
+        - in: query
+          name: pageIndex
+          type: integer
+          required: true
+          description: "The page number"
+        - in: query
+          name: pageNo
+          type: integer
+          required: true
+          description: "The records contained in one page"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: object
+            properties:
+              total:
+                type: number
+              rows:
+                type: array
+                items:
+                  $ref: "#/definitions/LOTOItem"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Authorization Info is missing or invalid"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "The operation is not allowed"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+
+  /getGroupLists:
+    get:
+      tags:
+        - "Lotos"
+      summary: "get the group lists"
+      description: "get the group lists"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: object
+            properties:
+              total:
+                type: number
+              rows:
+                type: array
+                description: "The group name list"
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Authorization Info is missing or invalid"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "The operation is not allowed"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+
+  /getLoToOperators:
+    get:
+      tags:
+        - "Lotos"
+      summary: "get all the loto operators"
+      description: "get all the loto operators"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: object
+            properties:
+              total:
+                type: number
+              rows:
+                type: array
+                description: "The operator name list"
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Authorization Info is missing or invalid"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "The operation is not allowed"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+
+  /getLocations:
+    get:
+      tags:
+        - "Lotos"
+      summary: "get all locations of specified group"
+      description: "get all locations of specified group"
+      parameters:
+        - in: query
+          name: group
+          type: string
+          description: "the group of locations"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: object
+            properties:
+              total:
+                type: number
+              rows:
+                type: array
+                description: "The location list"
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Authorization Info is missing or invalid"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "The operation is not allowed"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+
+  /upsertLoTo:
+    post:
+      tags:
+        - "Lotos"
+      summary: "create a LOTO"
+      description: "create a LOTO"
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: lotoItem
+          description: "the loto info to be created"
+          schema:
+            type: object
+            required:
+              - groupId
+              - groupName
+              - lotoDate
+              - lotoReason
+              - lotoOperator
+            properties:
+              locationSource:
+                type: string
+              locationId:
+                type: string
+              lotoDate:
+                type: string
+              lotoReason:
+                type: string
+              lotoOperator:
+                type: string
+              lotoRemovedDate:
+                type: string
+              lotoRemovedBy:
+                type: string
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Authorization Info is missing or invalid"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "The operation is not allowed"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+    put:
+      tags:
+        - "Lotos"
+      summary: "update a LOTO removed date"
+      description: "update a LOTO removed date"
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: lotoDate
+          description: "the loto removed date"
+          schema:
+            type: object
+            required:
+              - id
+              - lotoRemovedDate
+              - lotoRemovedBy
+            properties:
+              id:
+                type: integer
+              lotoRemovedDate:
+                type: string
+              lotoRemovedBy:
+                type: string
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Authorization Info is missing or invalid"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "The operation is not allowed"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+  /export:
+    get:
+      tags:
+        - "General Operation"
+      summary: "export the data"
+      parameters:
+        - in: query
+          name: type
+          type: string
+          default: 'MeetingLog'
+          enum:
+            - MeetingLog
+            - ActionItem
+            - LOTO
+          required: true
+          description: "The type of the data we export"
+      responses:
+        200:
+          description: OK
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Authorization Info is missing or invalid"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "The operation is not allowed"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+
+  /getUsers:
+    get:
+      tags:
+        - "General Operation"
+      summary: "get all users"
+      description: "get all users"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: object
+            properties:
+              total:
+                type: number
+              rows:
+                type: array
+                description: "The user list"
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Authorization Info is missing or invalid"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "The operation is not allowed"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+
+securityDefinitions:
+  APIKeyHeader:
+    type: apiKey
+    in: header
+    name: X-API-Key
+definitions:
+  LOTOItem:
+    type: object
+    required:
+      - id
+      - lotoName
+      - groupName
+      - location
+      - lotoDate
+      - lotoOperator
+      - lotoReason
+      - valueProcessPoints
+      - thirdPartyLocks
+      - lotoRemovedDate
+      - removedBy
+    properties:
+      id:
+        type: integer
+      lotoName:
+        type: string
+        description: The Loto Name
+      groupName:
+        type: string
+        description: The group name of this LoTo
+      location:
+        type: string
+        description: The location of this LoTo
+      lotoDate:
+        type: string
+        description: The date of the Loto
+      lotoOperator:
+        type: string
+        description: The name of the operator
+      lotoReason:
+        type: string
+        description: The reason about the Loto
+      valueProcessPoints:
+        type: string
+        description: The value/process points about the Loto
+      thirdPartyLocks:
+        type: string
+        description: The 3rd party locks
+      lotoRemovedDate:
+        type: string
+        description: The date when the loto removed
+      removedBy:
+        type: string
+        description: The name who removed this Loto
+
+  MeetingLog:
+    type: object
+    required:
+      - sessionID
+      - name
+      - leader
+      - date
+      - notes
+      - attendeesNumber
+    properties:
+      sessionID:
+        type: integer
+        description: The session Id
+      name:
+        type: string
+        description: The session Name
+      leader:
+        type: string
+        description: The host name of the session
+      date:
+        type: string
+        description: The time that the session starts
+      notes:
+        type: string
+        description: The notes about the session
+      attendeesNumber:
+        type: integer
+        description: The number of attendees of this session
+  Attendee:
+    type: object
+    required:
+      - signInTime
+      - attendeeName
+      - email
+      - supervisor
+    properties:
+      signInTime:
+        type: string
+        description: the sign in time of the user
+      attendee:
+        type: string
+        description: the attendee's name
+      email:
+        type: string
+        description: the email's name
+      supervisor:
+        type: string
+        description: the supervisor's name
+  ActionItem:
+    type: object
+    required:
+      - completed
+      - type
+      - title
+      - moc
+      - actionItemContent
+      - assignedBy
+      - assignedTo
+      - dueDate
+      - completedDate
+    properties:
+      completed:
+        type: boolean
+        description: Indicates whether an action has completed
+      type:
+        type: string
+        description: The type of this action item
+      title:
+        type: string
+        description: The title of this action
+      moc:
+        type: string
+        description: the Moc value
+      actionItemContent:
+        type: string
+        description: the content about this action item
+      assignedBy:
+        type: string
+        description: the name of the assigner
+      assignedTo:
+        type: string
+        description: the name of the assignee
+      dueDate:
+        type: string
+        description: the due date of this action item
+      completedDate:
+        type: string
+        description: the completation date of the action item
+  Error:
+    type: object
+    required:
+      - message
+    properties:
+      message:
+        type: string
+        description: The error message
