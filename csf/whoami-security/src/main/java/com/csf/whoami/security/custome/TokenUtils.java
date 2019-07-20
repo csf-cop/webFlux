@@ -1,5 +1,6 @@
 /**
- * 
+ * @author tuan
+ *
  */
 package com.csf.whoami.security.custome;
 
@@ -9,18 +10,11 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 
 /**
- * @author tuan
- *
- */
-import lombok.experimental.UtilityClass;
-
-/**
  * Custom utilities class. Method: Extract current token.
  * 
  * @author tuan
  *
  */
-@UtilityClass
 public class TokenUtils {
 
 	public static String extractCurrentToken() {
