@@ -15,19 +15,19 @@ services:
   #  links:
   #    - tomcat
  
-  #mysql:
-  #  container_name: docker-mysql
-  #  image: mysql:5.7
-  #  environment:
-  #    MYSQL_ROOT_PASSWORD: nimda
-  #    MYSQL_DATABASE: example_db
-  #    MYSQL_USER: example_db_user
-  #    MYSQL_PASSWORD: example_db_pass
-  #  ports:
-  #    - "3306:3306"
-  #  volumes:
-  #      - ./docker/db:/docker-entrypoint-initdb.d
-  #  restart: always
+  mysql:
+    container_name: docker-mysql
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: nimda
+      MYSQL_DATABASE: example_db
+      MYSQL_USER: example_db_user
+      MYSQL_PASSWORD: example_db_pass
+    ports:
+      - "3306:3306"
+    volumes:
+        - ./docker/db:/docker-entrypoint-initdb.d
+    restart: always
   
   app:
     restart: always
@@ -40,7 +40,7 @@ services:
       - "8080"
     # command: mvn clean spring-boot:run
     depends_on:
-  #    - mysql
+      - mysql
       - redis
   
   redis:
