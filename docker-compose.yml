@@ -1,17 +1,17 @@
 version: '3'
 services:
-  nginx:
-    container_name: docker-nginx
-    image: nginx:latest
-    restart: always
-    ports:
-      - 80:80
-      - 443:443
+  #nginx:
+  #  container_name: docker-nginx
+  #  image: nginx:latest
+  #  restart: always
+  #  ports:
+  #    - 80:80
+  #    - 443:443
     #volumes:
       # - ./nginx/conf.d:/etc/nginx/conf.d
       # - /var/run/docker.sock:/tmp/docker.sock:ro
-    depends_on:
-      - app
+  #  depends_on:
+  #    - app
   #  links:
   #    - tomcat
  
@@ -19,10 +19,10 @@ services:
     container_name: docker-mysql
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: nimda
-      MYSQL_DATABASE: example_db
-      MYSQL_USER: example_db_user
-      MYSQL_PASSWORD: example_db_pass
+      MYSQL_ROOT_PASSWORD: whoami_db
+      MYSQL_DATABASE: whoami_db
+      MYSQL_USER: whoami
+      MYSQL_PASSWORD: "!DNyp-qGmr:Pp:u8}~R*"
     ports:
       - "3306:3306"
     volumes:
