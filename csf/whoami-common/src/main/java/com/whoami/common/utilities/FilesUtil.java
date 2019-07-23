@@ -1,7 +1,7 @@
 /**
  * 
  */
-package whoami.common.utilities;
+package com.whoami.common.utilities;
 
 /**
  * @author tuan

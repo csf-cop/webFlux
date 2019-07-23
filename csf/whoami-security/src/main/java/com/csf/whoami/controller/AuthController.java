@@ -1,12 +1,12 @@
 package com.csf.whoami.controller;
 
+import com.csf.whoami.domain.ApiResponse;
+import com.csf.whoami.domain.AuthResponse;
+import com.csf.whoami.domain.LoginRequest;
+import com.csf.whoami.domain.SignUpRequest;
 import com.csf.whoami.exception.BadRequestException;
 import com.csf.whoami.model.AuthProvider;
 import com.csf.whoami.model.User;
-import com.csf.whoami.payload.ApiResponse;
-import com.csf.whoami.payload.AuthResponse;
-import com.csf.whoami.payload.LoginRequest;
-import com.csf.whoami.payload.SignUpRequest;
 import com.csf.whoami.repository.UserRepository;
 import com.csf.whoami.security.TokenProvider;
 

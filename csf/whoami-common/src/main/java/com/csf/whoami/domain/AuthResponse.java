@@ -1,4 +1,4 @@
-package com.csf.whoami.payload;
+package com.csf.whoami.domain;
 
 public class AuthResponse {
     private String accessToken;
