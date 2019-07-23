@@ -4,6 +4,7 @@
 package com.csf.whoami.adapter;
 
 import com.csf.whoami.domain.UserDTO;
+import com.csf.whoami.entity.RolesEntity;
 import com.csf.whoami.entity.UserEntity;
 import com.csf.whoami.entity.UserInfoEntity;
 
@@ -13,11 +14,12 @@ import com.csf.whoami.entity.UserInfoEntity;
  */
 public interface UserConvertAdapter {
 
-	public void userDtoToUserEntityConvert(UserDTO dto, UserEntity entity);
+	public UserEntity userDtoToUserEntityConvert(UserDTO dto);
+	public void userEntityToUserDtoConvert(UserEntity entity, UserDTO userDto);
 
-	public void userEntityToUserDtoConvert(UserEntity entity, UserDTO dto);
-
-	public void userDtoToUserInfoEntityConvert(UserDTO dto, UserInfoEntity entity);
-
+	public UserInfoEntity userDtoToUserInfoEntityConvert(UserDTO dto);
 	public void userInfoEntityToUserDtoConvert(UserInfoEntity entity, UserDTO dto);
+	
+	public RolesEntity userDtoToRolesEntityConvert(UserDTO dto);
+	public void rolesEntityToUserDtoConvert(RolesEntity entity, UserDTO dto);
 }

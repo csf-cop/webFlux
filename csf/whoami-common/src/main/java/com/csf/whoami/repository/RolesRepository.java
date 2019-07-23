@@ -14,5 +14,5 @@ import com.csf.whoami.entity.RolesEntity;
  */
 @Repository
 public interface RolesRepository extends JpaRepository<RolesEntity, Long> {
-
+	RolesEntity findByRoleName(String roleName);
 }

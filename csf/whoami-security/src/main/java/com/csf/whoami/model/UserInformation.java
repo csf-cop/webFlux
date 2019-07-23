@@ -1,5 +1,6 @@
 package com.csf.whoami.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.whoami.common.utilities.AuthProvider;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -9,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = "email")
 })
-public class User {
+public class UserInformation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

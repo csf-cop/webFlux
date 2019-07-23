@@ -1,12 +1,13 @@
 package com.csf.whoami.security.oauth2;
 
+import com.csf.whoami.domain.UserDTO;
 import com.csf.whoami.exception.OAuth2AuthenticationProcessingException;
-import com.csf.whoami.model.AuthProvider;
 import com.csf.whoami.model.User;
 import com.csf.whoami.oauth2.user.OAuth2UserInfo;
 import com.csf.whoami.oauth2.user.OAuth2UserInfoFactory;
 import com.csf.whoami.repository.UserRepository;
 import com.csf.whoami.security.UserPrincipal;
+import com.whoami.common.utilities.AuthProvider;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -46,8 +47,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
         }
 
-        Optional<User> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
-        User user;
+        Optional<UserDTO> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
+        UserDTO user;
         if(userOptional.isPresent()) {
             user = userOptional.get();
             if(!user.getProvider().equals(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
@@ -63,19 +64,19 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         return UserPrincipal.create(user, oAuth2User.getAttributes());
     }
 
-    private User registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
-        User user = new User();
+    private UserDTO registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
+    	UserDTO user = new UserDTO();
 
         user.setProvider(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()));
         user.setProviderId(oAuth2UserInfo.getId());
-        user.setName(oAuth2UserInfo.getName());
+        user.setUserName(oAuth2UserInfo.getName());
         user.setEmail(oAuth2UserInfo.getEmail());
-        user.setImageUrl(oAuth2UserInfo.getImageUrl());
+//        user.setImageUrl(oAuth2UserInfo.getImageUrl());
         return userRepository.save(user);
     }
 
-    private User updateExistingUser(User existingUser, OAuth2UserInfo oAuth2UserInfo) {
-        existingUser.setName(oAuth2UserInfo.getName());
+    private UserDTO updateExistingUser(UserDTO existingUser, OAuth2UserInfo oAuth2UserInfo) {
+        existingUser.setUserName(oAuth2UserInfo.getName());
         existingUser.setImageUrl(oAuth2UserInfo.getImageUrl());
         return userRepository.save(existingUser);
     }
