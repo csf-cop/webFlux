@@ -13,6 +13,6 @@ import com.csf.whoami.entity.RolesEntity;
  *
  */
 @Repository
-public interface RolesRepository extends JpaRepository<RolesEntity, Long> {
+public interface RolesRepository extends JpaRepository<RolesEntity, String> {
 	RolesEntity findByRoleName(String roleName);
 }

@@ -51,10 +51,6 @@ public class UserEntity extends BaseEntity {
 	@Column(name = "user_email")
 	private String email;
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "H03DT_ROLES", joinColumns = { @JoinColumn(name = "id") })
-	private Set<RolesEntity> roles;
-
 	/**
 	 * @return the userId
 	 */
@@ -116,20 +112,6 @@ public class UserEntity extends BaseEntity {
 	 */
 	public void setUserType(String userType) {
 		this.userType = userType;
-	}
-
-	/**
-	 * @return the roles
-	 */
-	public Set<RolesEntity> getRoles() {
-		return roles;
-	}
-
-	/**
-	 * @param roles the roles to set
-	 */
-	public void setRoles(Set<RolesEntity> roles) {
-		this.roles = roles;
 	}
 
 	/**

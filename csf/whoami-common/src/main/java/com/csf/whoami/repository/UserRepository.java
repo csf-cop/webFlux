@@ -13,7 +13,7 @@ import com.csf.whoami.entity.UserEntity;
  *
  */
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, String> {
 
 	UserEntity findByEmail(String email);
 

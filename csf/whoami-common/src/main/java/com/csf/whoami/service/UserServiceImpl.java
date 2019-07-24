@@ -9,12 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.csf.whoami.adapter.UserConvertAdapter;
 import com.csf.whoami.domain.UserDTO;
-import com.csf.whoami.entity.RolesEntity;
 import com.csf.whoami.entity.UserEntity;
 import com.csf.whoami.entity.UserInfoEntity;
 import com.csf.whoami.repository.RolesRepository;
 import com.csf.whoami.repository.UserInfoRepository;
 import com.csf.whoami.repository.UserRepository;
+import com.whoami.common.utilities.StringUtils;
 
 /**
  * @author tuan
@@ -29,7 +29,6 @@ public class UserServiceImpl implements UserService {
 	UserInfoRepository infoRepository;
 	@Autowired
 	RolesRepository rolesRepository;
-
 	@Autowired
 	UserConvertAdapter convertAdapter;
 
@@ -41,24 +40,28 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	@Override
 	public UserDTO signUp(UserDTO user) {
+		String userId = StringUtils.generateUUID();
 		// Add new User.
 		UserEntity userEntity = convertAdapter.userDtoToUserEntityConvert(user);
+
+		userEntity.setUserId(userId);
 		UserEntity result = userRepository.save(userEntity);
 		if (result != null) {
 			convertAdapter.userEntityToUserDtoConvert(result, user);
 		}
 
 		UserInfoEntity info = convertAdapter.userDtoToUserInfoEntityConvert(user);
+		info.setUserId(userId);
 		UserInfoEntity resultInfo = infoRepository.save(info);
 		if (resultInfo != null) {
 			convertAdapter.userInfoEntityToUserDtoConvert(resultInfo, user);
 		}
 
-		RolesEntity role = convertAdapter.userDtoToRolesEntityConvert(user);
-		RolesEntity roleResult = rolesRepository.save(role);
-		if (roleResult != null) {
-			convertAdapter.rolesEntityToUserDtoConvert(roleResult, user);
-		}
+//		RolesEntity role = convertAdapter.userDtoToRolesEntityConvert(user);
+//		RolesEntity roleResult = rolesRepository.save(role);
+//		if (roleResult != null) {
+//			convertAdapter.rolesEntityToUserDtoConvert(roleResult, user);
+//		}
 
 		return user;
 	}

@@ -13,6 +13,6 @@ import com.csf.whoami.entity.UserInfoEntity;
  *
  */
 @Repository
-public interface UserInfoRepository extends JpaRepository<UserInfoEntity, Long> {
+public interface UserInfoRepository extends JpaRepository<UserInfoEntity, String> {
 
 }

@@ -13,6 +13,6 @@ import com.csf.whoami.entity.UserRoleEntity;
  *
  */
 @Repository
-public interface UserRoleRepository extends JpaRepository<UserRoleEntity, Long> {
+public interface UserRoleRepository extends JpaRepository<UserRoleEntity, String> {
 
 }

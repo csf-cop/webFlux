@@ -13,6 +13,6 @@ import com.csf.whoami.entity.UserGroupEntity;
  *
  */
 @Repository
-public interface UserGroupRepository extends JpaRepository<UserGroupEntity, Long> {
+public interface UserGroupRepository extends JpaRepository<UserGroupEntity, String> {
 
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.csf.whoami.domain.UserDTO;
-import com.csf.whoami.exception.ResourceNotFoundException;
 import com.csf.whoami.service.UserService;
 
 @Service
