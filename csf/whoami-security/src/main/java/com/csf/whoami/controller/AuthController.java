@@ -81,7 +81,7 @@ public class AuthController {
                 .buildAndExpand(result.getUserId()).toUri();
 
         return ResponseEntity.created(location)
-                .body(new ApiResponse(true, "User registered successfully@"));
+                .body(new ApiResponse(true, "User registered successfully."));
     }
 
 }
