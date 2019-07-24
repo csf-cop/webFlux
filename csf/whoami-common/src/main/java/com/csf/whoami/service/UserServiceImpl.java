@@ -72,4 +72,22 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	@Override
+	public Optional<UserDTO> findByUsername(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserDTO addUser(UserDTO user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserDTO updateUser(UserDTO existingUser) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

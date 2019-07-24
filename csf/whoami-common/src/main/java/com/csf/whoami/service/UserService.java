@@ -18,4 +18,10 @@ public interface UserService {
 	UserDTO signUp(UserDTO user);
 
 	Optional<UserDTO> findById(String id);
+
+	Optional<UserDTO> findByUsername(String userName);
+
+	UserDTO addUser(UserDTO user);
+
+	UserDTO updateUser(UserDTO existingUser);
 }

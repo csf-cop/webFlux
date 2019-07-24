@@ -1,10 +1,6 @@
 package com.csf.whoami.security;
 
 
-import com.csf.whoami.domain.UserDTO;
-import com.csf.whoami.exception.ResourceNotFoundException;
-import com.csf.whoami.repository.UserRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,19 +8,23 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.csf.whoami.domain.UserDTO;
+import com.csf.whoami.exception.ResourceNotFoundException;
+import com.csf.whoami.service.UserService;
+
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String email)
+    public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
-        UserDTO user = userRepository.findByEmail(email)
+        UserDTO user = userService.findByUsername(username)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found with email : " + email)
+                        new UsernameNotFoundException("User not found with username : " + username)
         );
 
         return UserPrincipal.create(user);
@@ -32,7 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Transactional
     public UserDetails loadUserById(String id) {
-        UserDTO user = userRepository.findById(id).orElseThrow(
+        UserDTO user = userService.findById(id).orElseThrow(
             () -> new ResourceNotFoundException("User", "id", id)
         );
 
