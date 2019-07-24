@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -17,7 +18,6 @@ import com.csf.whoami.service.GroupService;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Scheduler;
 
 /**
  * @author mba0051
@@ -35,15 +35,24 @@ public class Template_Controller_Webflux {
 
 	@Autowired
 	private GroupService groupService;
-	@Autowired
-	private Scheduler scheduler;
-	
-	@GetMapping("/{id}")
-	public Mono<ServerResponse> list(ServerRequest request) {
-        Flux<GroupDTO> groups = Flux.defer(() -> Flux.fromIterable(groupService.findAll())).subscribeOn(scheduler);
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(groups, GroupDTO.class);
-    }
 
+	@GetMapping(value = { "", "/" })
+	public Mono<ServerResponse> getGroupsByUserId(ServerRequest request) {
+		Flux<GroupDTO> groups = groupService.findAll();
+		return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(groups, GroupDTO.class);
+	}
+
+	@GetMapping("/all")
+	public Mono<ServerResponse> getAllGroups(ServerRequest request) {
+		Flux<GroupDTO> groups = groupService.findAll();
+		return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(groups, GroupDTO.class);
+	}
+
+	@GetMapping("/{id}")
+	public Mono<ServerResponse> list(@RequestParam("id") String groupId) {
+		Mono<GroupDTO> groups = groupService.findById(groupId);
+		return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(groups, GroupDTO.class);
+	}
 //	public Mono<ServerResponse> show(ServerRequest request) {
 //        Long personId = Long.valueOf(request.pathVariable("id"));
 //        return Mono.fromCallable(() -> this.personRepository.findById(personId).orElse(new Person()))

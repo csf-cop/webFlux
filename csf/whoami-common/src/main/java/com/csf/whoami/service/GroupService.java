@@ -3,9 +3,9 @@
  */
 package com.csf.whoami.service;
 
-import java.util.List;
-
 import com.csf.whoami.domain.GroupDTO;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
  * @author mba0051
@@ -13,5 +13,7 @@ import com.csf.whoami.domain.GroupDTO;
  */
 public interface GroupService {
 
-	List<GroupDTO> findAll();
+	Flux<GroupDTO> findAll();
+	Flux<GroupDTO> findAllByUserId(String userId);
+	Mono<GroupDTO> findById(String groupId);
 }

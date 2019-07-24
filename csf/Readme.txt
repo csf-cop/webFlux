@@ -22,9 +22,6 @@ Mono.fromCallable(() -> blockingRepository.save())
         
         
 https://huongdanjava.com/spring-webflux-2
-https://mydeveloperplanet.com/2018/03/21/spring-webflux-a-basic-crud-application-part-1/
-
-https://dzone.com/articles/spring-5-webflux-and-jdbc-to-block-or-not-to-block
 https://github.com/rxonda/webflux-with-jpa/tree/master/src/main/java/com/rxonda
 
 

@@ -39,4 +39,22 @@ public class GroupDTO {
 	public void setGroupName(String groupName) {
 		this.groupName = groupName;
 	}
+
+	/**
+	 * 
+	 */
+	public GroupDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param groupId
+	 * @param groupName
+	 */
+	public GroupDTO(String groupId, String groupName) {
+		super();
+		this.groupId = groupId;
+		this.groupName = groupName;
+	}
 }
