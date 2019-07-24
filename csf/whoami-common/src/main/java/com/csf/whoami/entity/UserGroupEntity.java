@@ -8,13 +8,23 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 /**
  * @author tuan
  *
  */
 @Entity
 @Table(name = "H05DT_GROUP")
-public class UserGroupEntity {
+@Where(clause = "delflg = 0")
+@SQLDelete(sql = "UPDATE H05DT_GROUP SET delflg = 1 WHERE user_id = ?")
+public class UserGroupEntity extends BaseEntity {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String id;
@@ -68,19 +78,5 @@ public class UserGroupEntity {
 	 */
 	public void setGroupId(String groupId) {
 		this.groupId = groupId;
-	}
-
-	/**
-	 * @return the isDeleted
-	 */
-	public Boolean getIsDeleted() {
-		return isDeleted;
-	}
-
-	/**
-	 * @param isDeleted the isDeleted to set
-	 */
-	public void setIsDeleted(Boolean isDeleted) {
-		this.isDeleted = isDeleted;
 	}
 }

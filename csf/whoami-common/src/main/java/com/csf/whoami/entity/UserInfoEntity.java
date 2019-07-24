@@ -12,15 +12,27 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 /**
  * @author tuan
  *
  */
 @Entity
 @Table(name = "H02DT_USER_INFO", uniqueConstraints = { @UniqueConstraint(columnNames = "user_id_card") })
-public class UserInfoEntity {
+@Where(clause = "delflg = 0")
+@SQLDelete(sql = "UPDATE H02DT_USER_INFO SET delflg = 1 WHERE user_id = ?")
+public class UserInfoEntity extends BaseEntity {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	private String id;
+	@Column(name = "user_id")
+	private String userId;
 
 	@Column(name = "user_full_name")
 	private String fullName;
@@ -47,15 +59,15 @@ public class UserInfoEntity {
 	/**
 	 * @return the id
 	 */
-	public String getId() {
-		return id;
+	public String getUserId() {
+		return userId;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
-		this.id = id;
+	public void setUserId(String id) {
+		this.userId = id;
 	}
 
 	/**

@@ -1,5 +1,5 @@
-CREATE DATABASE `my-test-app`;
-USE my-test-app;
+--CREATE DATABASE `my-test-app`;
+--USE my-test-app;
 
 CREATE TABLE EMPLOYEE (
   EMPLOYEE_ID BIGINT(20) NOT NULL AUTO_INCREMENT,

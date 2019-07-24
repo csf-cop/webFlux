@@ -10,16 +10,27 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 /**
  * @author tuan
  *
  */
 @Entity
 @Table(name = "H05DT_GROUP")
-public class GroupEntity {
+@Where(clause = "delflg = 0")
+@SQLDelete(sql = "UPDATE H05DT_GROUP SET delflg = 1 WHERE group_id = ?")
+public class GroupEntity extends BaseEntity {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String id;
+	@Column(name = "group_id")
+	private String groupId;
 
 	@Column(name = "group_name")
 	private String groupName;
@@ -43,17 +54,17 @@ public class GroupEntity {
 	private Boolean isDeleted;
 
 	/**
-	 * @return the id
+	 * @return the groupId
 	 */
-	public String getId() {
-		return id;
+	public String getGroupId() {
+		return groupId;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param groupId the groupId to set
 	 */
-	public void setId(String id) {
-		this.id = id;
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
 	}
 
 	/**
@@ -138,19 +149,5 @@ public class GroupEntity {
 	 */
 	public void setParentGroup(String parentGroup) {
 		this.parentGroup = parentGroup;
-	}
-
-	/**
-	 * @return the isDeleted
-	 */
-	public Boolean getIsDeleted() {
-		return isDeleted;
-	}
-
-	/**
-	 * @param isDeleted the isDeleted to set
-	 */
-	public void setIsDeleted(Boolean isDeleted) {
-		this.isDeleted = isDeleted;
 	}
 }

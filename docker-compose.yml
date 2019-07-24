@@ -41,16 +41,16 @@ services:
     # command: mvn clean spring-boot:run
     depends_on:
       - mysql
-      - redis
+  #    - redis
   
-  redis:
-      container_name: docker-redis
-      image: redis:5.0.3-alpine
-      restart: always
-      environment:
-        - ALLOW_EMPTY_PASSWORD=yes
-      ports:
-        - '6379:6379'
+ # redis:
+ #     container_name: docker-redis
+ #     image: redis:5.0.3-alpine
+ #     restart: always
+#      environment:
+#        - ALLOW_EMPTY_PASSWORD=yes
+#      ports:
+#        - '6379:6379'
 
   # First node of the first Tomcat virtual host.
   #tomcat:

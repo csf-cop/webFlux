@@ -21,7 +21,7 @@ public class UserConvertAdapterImpl implements UserConvertAdapter {
 	@Override
 	public UserEntity userDtoToUserEntityConvert(UserDTO dto) {
 		UserEntity entity = new UserEntity();
-		entity.setId(dto.getUserId());
+		entity.setUserId(dto.getUserId());
 		entity.setUserName(dto.getUserName());
 		entity.setUserPassword(dto.getPassword());
 		// TODO : Review again.
@@ -33,7 +33,7 @@ public class UserConvertAdapterImpl implements UserConvertAdapter {
 	@Override
 	public UserInfoEntity userDtoToUserInfoEntityConvert(UserDTO dto) {
 		UserInfoEntity entity = new UserInfoEntity();
-		entity.setId(dto.getUserId());
+		entity.setUserId(dto.getUserId());
 		entity.setEmail(dto.getEmail());
 		entity.setFullAddress(dto.getAddress());
 		entity.setDateOfBirth(dto.getDateOfBirth());
@@ -49,7 +49,7 @@ public class UserConvertAdapterImpl implements UserConvertAdapter {
 
 	@Override
 	public void userEntityToUserDtoConvert(UserEntity entity, UserDTO userDto) {
-		userDto.setUserId(entity.getId());
+		userDto.setUserId(entity.getUserId());
 		userDto.setUserName(entity.getUserName());
 		userDto.setProviderId(entity.getUserType());
 	}

@@ -3,11 +3,20 @@
  */
 package com.csf.whoami.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 /**
  * @author tuan
@@ -15,10 +24,18 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "H01DT_USERS", uniqueConstraints = { @UniqueConstraint(columnNames = "user_name") })
-public class UserEntity {
+@Where(clause = "delflg = 0")
+@SQLDelete(sql = "UPDATE H01DT_USERS SET delflg = 1 WHERE user_id = ?")
+public class UserEntity extends BaseEntity {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String id;
+	@Column(name = "user_id")
+	private String userId;
 
 	@Column(name = "user_name")
 	private String userName;
@@ -26,24 +43,25 @@ public class UserEntity {
 	@Column(name = "user_password")
 	private String userPassword;
 
-	@Column(name = "user_info")
-	private String userInfo;
-
 	@Column(name = "user_type")
 	private String userType;
 
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "H03DT_ROLES", joinColumns = { @JoinColumn(name = "id") })
+	private Set<RolesEntity> roles;
+
 	/**
-	 * @return the id
+	 * @return the userId
 	 */
-	public String getId() {
-		return id;
+	public String getUserId() {
+		return userId;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param userId the userId to set
 	 */
-	public void setId(String id) {
-		this.id = id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	/**
@@ -75,17 +93,10 @@ public class UserEntity {
 	}
 
 	/**
-	 * @return the userInfo
+	 * @return the serialversionuid
 	 */
-	public String getUserInfo() {
-		return userInfo;
-	}
-
-	/**
-	 * @param userInfo the userInfo to set
-	 */
-	public void setUserInfo(String userInfo) {
-		this.userInfo = userInfo;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	/**
@@ -100,5 +111,19 @@ public class UserEntity {
 	 */
 	public void setUserType(String userType) {
 		this.userType = userType;
+	}
+
+	/**
+	 * @return the roles
+	 */
+	public Set<RolesEntity> getRoles() {
+		return roles;
+	}
+
+	/**
+	 * @param roles the roles to set
+	 */
+	public void setRoles(Set<RolesEntity> roles) {
+		this.roles = roles;
 	}
 }
