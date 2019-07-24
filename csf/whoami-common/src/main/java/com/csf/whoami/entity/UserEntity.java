@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -45,6 +46,10 @@ public class UserEntity extends BaseEntity {
 
 	@Column(name = "user_type")
 	private String userType;
+
+	@Email
+	@Column(name = "user_email")
+	private String email;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "H03DT_ROLES", joinColumns = { @JoinColumn(name = "id") })
@@ -125,5 +130,19 @@ public class UserEntity extends BaseEntity {
 	 */
 	public void setRoles(Set<RolesEntity> roles) {
 		this.roles = roles;
+	}
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

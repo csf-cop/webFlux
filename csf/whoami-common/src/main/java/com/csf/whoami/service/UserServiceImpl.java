@@ -3,8 +3,6 @@
  */
 package com.csf.whoami.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,11 +32,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserConvertAdapter convertAdapter;
-	
+
 	@Override
 	public boolean existsByEmail(String email) {
-		// TODO Auto-generated method stub
-		return false;
+		return userRepository.findByEmail(email) != null;
 	}
 
 	@Transactional
@@ -67,13 +64,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Optional<UserDTO> findById(String id) {
-		// TODO Auto-generated method stub
+	public UserDTO findById(String id) {
 		return null;
 	}
 
 	@Override
-	public Optional<UserDTO> findByUsername(String userName) {
+	public UserDTO findByUsername(String userName) {
 		// TODO Auto-generated method stub
 		return null;
 	}

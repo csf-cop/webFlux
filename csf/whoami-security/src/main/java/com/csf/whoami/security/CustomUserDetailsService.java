@@ -22,19 +22,20 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
-        UserDTO user = userService.findByUsername(username)
-                .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found with username : " + username)
-        );
+        UserDTO user = userService.findByUsername(username);
+//                .orElseThrow(() ->
+//                        new UsernameNotFoundException("User not found with username : " + username)
+//        );
 
         return UserPrincipal.create(user);
     }
 
     @Transactional
     public UserDetails loadUserById(String id) {
-        UserDTO user = userService.findById(id).orElseThrow(
-            () -> new ResourceNotFoundException("User", "id", id)
-        );
+        UserDTO user = userService.findById(id);
+//        		.orElseThrow(
+//            () -> new ResourceNotFoundException("User", "id", id)
+//        );
 
         return UserPrincipal.create(user);
     }

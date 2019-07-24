@@ -14,12 +14,15 @@ import com.csf.whoami.entity.UserInfoEntity;
  */
 public interface UserConvertAdapter {
 
-	public UserEntity userDtoToUserEntityConvert(UserDTO dto);
-	public void userEntityToUserDtoConvert(UserEntity entity, UserDTO userDto);
+	UserEntity userDtoToUserEntityConvert(UserDTO dto);
 
-	public UserInfoEntity userDtoToUserInfoEntityConvert(UserDTO dto);
-	public void userInfoEntityToUserDtoConvert(UserInfoEntity entity, UserDTO dto);
-	
-	public RolesEntity userDtoToRolesEntityConvert(UserDTO dto);
-	public void rolesEntityToUserDtoConvert(RolesEntity entity, UserDTO dto);
+	void userEntityToUserDtoConvert(UserEntity entity, UserDTO userDto);
+
+	UserInfoEntity userDtoToUserInfoEntityConvert(UserDTO dto);
+
+	void userInfoEntityToUserDtoConvert(UserInfoEntity entity, UserDTO dto);
+
+	RolesEntity userDtoToRolesEntityConvert(UserDTO dto);
+
+	void rolesEntityToUserDtoConvert(RolesEntity entity, UserDTO dto);
 }

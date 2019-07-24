@@ -34,7 +34,6 @@ public class UserConvertAdapterImpl implements UserConvertAdapter {
 	public UserInfoEntity userDtoToUserInfoEntityConvert(UserDTO dto) {
 		UserInfoEntity entity = new UserInfoEntity();
 		entity.setUserId(dto.getUserId());
-		entity.setEmail(dto.getEmail());
 		entity.setFullAddress(dto.getAddress());
 		entity.setDateOfBirth(dto.getDateOfBirth());
 		return entity;
@@ -58,7 +57,6 @@ public class UserConvertAdapterImpl implements UserConvertAdapter {
 	public void userInfoEntityToUserDtoConvert(UserInfoEntity entity, UserDTO dto) {
 		dto.setAddress(entity.getFullAddress());
 		dto.setDateOfBirth(entity.getDateOfBirth());
-		dto.setEmail(entity.getEmail());
 	}
 
 	@Override

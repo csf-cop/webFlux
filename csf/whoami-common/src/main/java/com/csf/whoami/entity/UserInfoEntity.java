@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.Email;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -48,10 +47,6 @@ public class UserInfoEntity extends BaseEntity {
 
 	@Column(name = "user_full_address")
 	private String fullAddress;
-
-	@Email
-	@Column(name = "user_email")
-	private String email;
 
 	@Column(name = "user_phone_contact")
 	private String phoneContact;
@@ -138,20 +133,6 @@ public class UserInfoEntity extends BaseEntity {
 	 */
 	public void setFullAddress(String fullAddress) {
 		this.fullAddress = fullAddress;
-	}
-
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * @param email the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	/**
