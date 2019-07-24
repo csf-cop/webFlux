@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.csf.whoami.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;

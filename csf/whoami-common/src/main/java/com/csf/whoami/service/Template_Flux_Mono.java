@@ -50,3 +50,18 @@ public class Template_Flux_Mono {
 //		})).subscribeOn(jdbcScheduler);
 //	}
 }
+
+//@Slf4j
+//@Service
+//public class MemoService {
+//	private final MemoRepository memoRepository;
+//
+//	public MemoService(MemoRepository memoRepository) {
+//		this.memoRepository = memoRepository;
+//	}
+//
+//	public Mono<Memo> save(MemoRequestDTO memoRequestDTO) {
+//		log.info("===== MemoService 시작 =====");
+//		return Mono.fromCallable(() -> memoRepository.save(Memo.of(memoRequestDTO))).subscribeOn(Schedulers.elastic()).log();
+//	}
+//}
