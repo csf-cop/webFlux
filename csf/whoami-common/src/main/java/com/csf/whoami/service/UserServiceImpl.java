@@ -21,11 +21,6 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
 	@Override
-	public Optional<UserEntity> findByEmail(String email) {
-		return userRepository.findByEmail(email);
-	}
-
-	@Override
 	public UserEntity save(UserEntity user) {
 		return userRepository.save(user);
 	}
@@ -38,5 +33,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Optional<UserEntity> findById(String userId) {
 		return userRepository.findById(userId);
+	}
+
+	@Override
+	public Optional<UserEntity> findByUsername(String username) {
+		return userRepository.findByUsername(username);
 	}
 }

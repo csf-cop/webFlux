@@ -1,7 +1,6 @@
 package com.csf.whoami.controller;
 
 import java.net.URI;
-import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -27,63 +26,65 @@ import com.csf.whoami.entity.UserEntity;
 import com.csf.whoami.exception.BadRequestException;
 import com.csf.whoami.security.TokenProvider;
 import com.csf.whoami.service.UserService;
+import com.whoami.common.utilities.StringUtils;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+	@Autowired
+	private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private TokenProvider tokenProvider;
+	@Autowired
+	private TokenProvider tokenProvider;
 
-    @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequestDomain loginRequest) {
+	@PostMapping("/login")
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequestDomain loginRequest) {
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getEmail(),
-                        loginRequest.getPassword()
-                )
-        );
+		String username = null;
+		if (StringUtils.isValidString(loginRequest.getUsername())) {
+			username = StringUtils.trim(loginRequest.getUsername());
+		} else if (StringUtils.isValidString(loginRequest.getEmail())) {
+			username = StringUtils.trim(loginRequest.getEmail());
+		} else if (StringUtils.isValidString(loginRequest.getPhoneNumber())) {
+			username = StringUtils.trim(loginRequest.getPhoneNumber());
+		}
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+		Authentication authentication = authenticationManager
+				.authenticate(new UsernamePasswordAuthenticationToken(username, loginRequest.getPassword()));
 
-        String token = tokenProvider.createToken(authentication);
-        return ResponseEntity.ok(new AuthResponseDomain(token));
-    }
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 
-    @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequestDomain signUpRequest) {
-        if(userService.existsByEmail(signUpRequest.getEmail())) {
-            throw new BadRequestException("Email address already in use.");
-        }
+		String token = tokenProvider.createToken(authentication);
+		return ResponseEntity.ok(new AuthResponseDomain(token));
+	}
 
-        // Creating user's account
-        UserEntity user = new UserEntity();
-        user.setId(UUID.randomUUID().toString());
-        user.setName(signUpRequest.getName());
-        user.setEmail(signUpRequest.getEmail());
-        user.setPassword(signUpRequest.getPassword());
-        user.setProvider(AuthProvider.local);
+	@PostMapping("/signup")
+	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequestDomain signUpRequest) {
+		if (userService.existsByEmail(signUpRequest.getEmail())) {
+			throw new BadRequestException("Email address already in use.");
+		}
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+		// Creating user's account
+		UserEntity user = new UserEntity();
+		user.setId(StringUtils.generateUUID());
+		user.setName(signUpRequest.getName());
+		user.setEmail(signUpRequest.getEmail());
+		user.setPassword(signUpRequest.getPassword());
+		user.setProvider(AuthProvider.local);
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		UserEntity result = userService.save(user);
 
-        UserEntity result = userService.save(user);
+		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/me")
+				.buildAndExpand(result.getId()).toUri();
 
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/user/me")
-                .buildAndExpand(result.getId()).toUri();
-
-        return ResponseEntity.created(location)
-                .body(new ApiResponseDomain(true, "User registered successfully@"));
-    }
+		return ResponseEntity.created(location).body(new ApiResponseDomain(true, "User registered successfully@"));
+	}
 
 }

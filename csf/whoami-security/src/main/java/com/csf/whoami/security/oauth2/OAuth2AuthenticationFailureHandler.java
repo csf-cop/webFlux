@@ -6,7 +6,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.csf.whoami.util.CookieUtils;
+import com.csf.whoami.utils.CookieUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;

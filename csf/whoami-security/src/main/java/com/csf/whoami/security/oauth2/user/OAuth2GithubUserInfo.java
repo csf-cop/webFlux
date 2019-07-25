@@ -2,9 +2,9 @@ package com.csf.whoami.security.oauth2.user;
 
 import java.util.Map;
 
-public class GithubOAuth2UserInfo extends OAuth2UserInfo {
+public class OAuth2GithubUserInfo extends OAuth2UserInfo {
 
-    public GithubOAuth2UserInfo(Map<String, Object> attributes) {
+    public OAuth2GithubUserInfo(Map<String, Object> attributes) {
         super(attributes);
     }
 

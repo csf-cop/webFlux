@@ -1,4 +1,4 @@
-package com.csf.whoami.util;
+package com.csf.whoami.utils;
 
 import org.springframework.util.SerializationUtils;
 import javax.servlet.http.Cookie;

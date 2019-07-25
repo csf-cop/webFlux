@@ -24,11 +24,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String email)
+    public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
-        UserEntity user = service.findByEmail(email)
-                .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found with email : " + email)
+        UserEntity user = service.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + username)
         );
 
         return UserPrincipal.create(user);

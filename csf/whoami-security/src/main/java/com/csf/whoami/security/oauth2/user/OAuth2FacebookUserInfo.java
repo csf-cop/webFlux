@@ -2,8 +2,8 @@ package com.csf.whoami.security.oauth2.user;
 
 import java.util.Map;
 
-public class FacebookOAuth2UserInfo extends OAuth2UserInfo {
-	public FacebookOAuth2UserInfo(Map<String, Object> attributes) {
+public class OAuth2FacebookUserInfo extends OAuth2UserInfo {
+	public OAuth2FacebookUserInfo(Map<String, Object> attributes) {
 		super(attributes);
 	}
 

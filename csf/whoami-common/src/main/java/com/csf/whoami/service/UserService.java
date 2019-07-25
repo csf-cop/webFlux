@@ -13,12 +13,12 @@ import com.csf.whoami.entity.UserEntity;
  */
 public interface UserService {
 
-	Optional<UserEntity> findByEmail(String email);
-
 	UserEntity save(UserEntity user);
 
 	boolean existsByEmail(String email);
 
 	Optional<UserEntity> findById(String id);
+
+	Optional<UserEntity> findByUsername(String username);
 
 }
