@@ -69,11 +69,11 @@ server:
     accesslog:
       enabled: true
       suffix: .log
-      prefix: access_log
+      prefix: tomcat_log
       file-date-format: .yyyy-MM-dd
       directory: 
       pattern: common
-    basedir: tomcat
+    basedir: ./logs/tomcat
 
 logging:
   level:
