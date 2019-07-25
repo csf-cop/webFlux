@@ -63,3 +63,22 @@ server:
   #  key-store-password: password
   #  key-store-type: PKCS12
   #  key-alias: key-tomcat
+
+ # log server tomcat
+  tomcat:
+    accesslog:
+      enabled: true
+      suffix: .log
+      prefix: access_log
+      file-date-format: .yyyy-MM-dd
+      directory: 
+      pattern: common
+    basedir: tomcat
+
+logging:
+  level:
+    root: INFO
+#path file log
+  path: ./logs
+#file name
+  file: whoami
