@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.csf.whoami.adapter.GroupConvertAdapter;
-import com.csf.whoami.domain.GroupDTO;
+import com.csf.whoami.domain.GroupDomain;
 import com.csf.whoami.entity.GroupEntity;
 import com.csf.whoami.repository.GroupRepository;
 
@@ -27,10 +27,10 @@ public class GroupServiceImpl implements GroupService {
 	private GroupConvertAdapter groupAdapter;
 
 	@Override
-	public List<GroupDTO> findAll() {
+	public List<GroupDomain> findAll() {
 		List<GroupEntity> entities = groupRepository.findAll();
 
-		List<GroupDTO> groups = new ArrayList<GroupDTO>();
+		List<GroupDomain> groups = new ArrayList<GroupDomain>();
 		for (GroupEntity item : entities) {
 			groups.add(groupAdapter.groupEntityToGroupDtoConvert(item));
 		}

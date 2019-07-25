@@ -1,4 +1,4 @@
-package com.csf.whoami.model;
+package com.csf.whoami.entity;
 
 public enum  AuthProvider {
     local,

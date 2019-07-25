@@ -7,7 +7,7 @@ package com.csf.whoami.domain;
  * @author mba0051
  *
  */
-public class GroupDTO {
+public class GroupDomain {
 
 	private String groupId;
 	private String groupName;

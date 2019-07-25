@@ -3,23 +3,22 @@
  */
 package com.csf.whoami.service;
 
-import com.csf.whoami.domain.UserDTO;
+import java.util.Optional;
+
+import com.csf.whoami.entity.UserEntity;
 
 /**
- * @author tuan
+ * @author mba0051
  *
  */
 public interface UserService {
 
+	Optional<UserEntity> findByEmail(String email);
+
+	UserEntity save(UserEntity user);
+
 	boolean existsByEmail(String email);
 
-	UserDTO signUp(UserDTO user);
+	Optional<UserEntity> findById(String id);
 
-	UserDTO findById(String id);
-
-	UserDTO findByUsername(String userName);
-
-	UserDTO addUser(UserDTO user);
-
-	UserDTO updateUser(UserDTO existingUser);
 }

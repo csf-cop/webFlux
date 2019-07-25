@@ -1,14 +1,9 @@
 package com.csf.whoami.controller;
 
-import com.csf.whoami.exception.BadRequestException;
-import com.csf.whoami.model.AuthProvider;
-import com.csf.whoami.model.UserEntity;
-import com.csf.whoami.payload.ApiResponse;
-import com.csf.whoami.payload.AuthResponse;
-import com.csf.whoami.payload.LoginRequest;
-import com.csf.whoami.payload.SignUpRequest;
-import com.csf.whoami.repository.UserRepository;
-import com.csf.whoami.security.TokenProvider;
+import java.net.URI;
+import java.util.UUID;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +12,21 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
-import java.net.URI;
-import java.util.UUID;
+import com.csf.whoami.domain.ApiResponseDomain;
+import com.csf.whoami.domain.AuthResponseDomain;
+import com.csf.whoami.domain.LoginRequestDomain;
+import com.csf.whoami.domain.SignUpRequestDomain;
+import com.csf.whoami.entity.AuthProvider;
+import com.csf.whoami.entity.UserEntity;
+import com.csf.whoami.exception.BadRequestException;
+import com.csf.whoami.security.TokenProvider;
+import com.csf.whoami.service.UserService;
 
 @RestController
 @RequestMapping("/auth")
@@ -32,7 +36,7 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -41,7 +45,7 @@ public class AuthController {
     private TokenProvider tokenProvider;
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequestDomain loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -53,12 +57,12 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = tokenProvider.createToken(authentication);
-        return ResponseEntity.ok(new AuthResponse(token));
+        return ResponseEntity.ok(new AuthResponseDomain(token));
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if(userRepository.existsByEmail(signUpRequest.getEmail())) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequestDomain signUpRequest) {
+        if(userService.existsByEmail(signUpRequest.getEmail())) {
             throw new BadRequestException("Email address already in use.");
         }
 
@@ -72,14 +76,14 @@ public class AuthController {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        UserEntity result = userRepository.save(user);
+        UserEntity result = userService.save(user);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/user/me")
                 .buildAndExpand(result.getId()).toUri();
 
         return ResponseEntity.created(location)
-                .body(new ApiResponse(true, "User registered successfully@"));
+                .body(new ApiResponseDomain(true, "User registered successfully@"));
     }
 
 }

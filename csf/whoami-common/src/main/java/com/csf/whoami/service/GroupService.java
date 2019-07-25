@@ -5,7 +5,7 @@ package com.csf.whoami.service;
 
 import java.util.List;
 
-import com.csf.whoami.domain.GroupDTO;
+import com.csf.whoami.domain.GroupDomain;
 
 /**
  * @author mba0051
@@ -13,5 +13,5 @@ import com.csf.whoami.domain.GroupDTO;
  */
 public interface GroupService {
 
-	List<GroupDTO> findAll();
+	List<GroupDomain> findAll();
 }

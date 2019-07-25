@@ -1,10 +1,10 @@
-package com.csf.whoami.payload;
+package com.csf.whoami.domain;
 
-public class AuthResponse {
+public class AuthResponseDomain {
     private String accessToken;
     private String tokenType = "Bearer";
 
-    public AuthResponse(String accessToken) {
+    public AuthResponseDomain(String accessToken) {
         this.accessToken = accessToken;
     }
 

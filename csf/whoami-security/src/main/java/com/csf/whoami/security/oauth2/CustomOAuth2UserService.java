@@ -1,12 +1,6 @@
 package com.csf.whoami.security.oauth2;
 
-import com.csf.whoami.exception.OAuth2AuthenticationProcessingException;
-import com.csf.whoami.model.AuthProvider;
-import com.csf.whoami.model.UserEntity;
-import com.csf.whoami.repository.UserRepository;
-import com.csf.whoami.security.UserPrincipal;
-import com.csf.whoami.security.oauth2.user.OAuth2UserInfo;
-import com.csf.whoami.security.oauth2.user.OAuth2UserInfoFactory;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -18,13 +12,19 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Optional;
+import com.csf.whoami.entity.AuthProvider;
+import com.csf.whoami.entity.UserEntity;
+import com.csf.whoami.exception.OAuth2AuthenticationProcessingException;
+import com.csf.whoami.security.UserPrincipal;
+import com.csf.whoami.security.oauth2.user.OAuth2UserInfo;
+import com.csf.whoami.security.oauth2.user.OAuth2UserInfoFactory;
+import com.csf.whoami.service.UserService;
 
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
@@ -46,7 +46,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
         }
 
-        Optional<UserEntity> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
+        Optional<UserEntity> userOptional = userService.findByEmail(oAuth2UserInfo.getEmail());
         UserEntity user;
         if(userOptional.isPresent()) {
             user = userOptional.get();
@@ -71,13 +71,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         user.setName(oAuth2UserInfo.getName());
         user.setEmail(oAuth2UserInfo.getEmail());
         user.setImageUrl(oAuth2UserInfo.getImageUrl());
-        return userRepository.save(user);
+        return userService.save(user);
     }
 
     private UserEntity updateExistingUser(UserEntity existingUser, OAuth2UserInfo oAuth2UserInfo) {
         existingUser.setName(oAuth2UserInfo.getName());
         existingUser.setImageUrl(oAuth2UserInfo.getImageUrl());
-        return userRepository.save(existingUser);
+        return userService.save(existingUser);
     }
 
 }

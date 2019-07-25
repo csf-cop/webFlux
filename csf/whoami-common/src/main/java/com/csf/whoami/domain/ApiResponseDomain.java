@@ -1,10 +1,10 @@
 package com.csf.whoami.domain;
 
-public class ApiResponse {
+public class ApiResponseDomain {
     private boolean success;
     private String message;
 
-    public ApiResponse(boolean success, String message) {
+    public ApiResponseDomain(boolean success, String message) {
         this.success = success;
         this.message = message;
     }

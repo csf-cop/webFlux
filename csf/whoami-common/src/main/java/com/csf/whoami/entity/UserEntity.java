@@ -1,4 +1,4 @@
-package com.csf.whoami.model;
+package com.csf.whoami.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

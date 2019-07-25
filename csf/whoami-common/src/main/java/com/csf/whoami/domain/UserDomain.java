@@ -14,7 +14,7 @@ import com.whoami.common.utilities.AuthProvider;
  * @author tuan
  *
  */
-public class UserDTO {
+public class UserDomain {
 
 	String userId;
 	String userName;
