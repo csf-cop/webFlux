@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.csf.whoami.domain.UserDTO;
 import com.csf.whoami.entity.RolesEntity;
-import com.csf.whoami.entity.UserEntity;
+import com.csf.whoami.entity.UserEntityHT;
 import com.csf.whoami.entity.UserInfoEntity;
 import com.whoami.common.utilities.AuthProvider;
 
@@ -19,8 +19,8 @@ import com.whoami.common.utilities.AuthProvider;
 public class UserConvertAdapterImpl implements UserConvertAdapter {
 
 	@Override
-	public UserEntity userDtoToUserEntityConvert(UserDTO dto) {
-		UserEntity entity = new UserEntity();
+	public UserEntityHT userDtoToUserEntityConvert(UserDTO dto) {
+		UserEntityHT entity = new UserEntityHT();
 		entity.setUserId(dto.getUserId());
 		entity.setUserName(dto.getUserName());
 		entity.setUserPassword(dto.getPassword());
@@ -47,7 +47,7 @@ public class UserConvertAdapterImpl implements UserConvertAdapter {
 	}
 
 	@Override
-	public void userEntityToUserDtoConvert(UserEntity entity, UserDTO userDto) {
+	public void userEntityToUserDtoConvert(UserEntityHT entity, UserDTO userDto) {
 		userDto.setUserId(entity.getUserId());
 		userDto.setUserName(entity.getUserName());
 		userDto.setProviderId(entity.getUserType());

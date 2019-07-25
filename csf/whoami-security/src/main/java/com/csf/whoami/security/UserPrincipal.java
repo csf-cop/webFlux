@@ -10,7 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import com.csf.whoami.domain.UserDTO;
+import com.csf.whoami.model.UserEntity;
 
 public class UserPrincipal implements OAuth2User, UserDetails {
 
@@ -31,13 +31,13 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 		this.authorities = authorities;
 	}
 
-	public static UserPrincipal create(UserDTO user) {
+	public static UserPrincipal create(UserEntity user) {
 		List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
 
-		return new UserPrincipal(user.getUserId(), user.getEmail(), user.getPassword(), authorities);
+		return new UserPrincipal(user.getId(), user.getEmail(), user.getPassword(), authorities);
 	}
 
-	public static UserPrincipal create(UserDTO user, Map<String, Object> attributes) {
+	public static UserPrincipal create(UserEntity user, Map<String, Object> attributes) {
 		UserPrincipal userPrincipal = UserPrincipal.create(user);
 		userPrincipal.setAttributes(attributes);
 		return userPrincipal;

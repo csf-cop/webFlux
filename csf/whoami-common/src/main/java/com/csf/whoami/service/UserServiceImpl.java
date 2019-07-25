@@ -3,13 +3,15 @@
  */
 package com.csf.whoami.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.csf.whoami.adapter.UserConvertAdapter;
 import com.csf.whoami.domain.UserDTO;
-import com.csf.whoami.entity.UserEntity;
+import com.csf.whoami.entity.UserEntityHT;
 import com.csf.whoami.entity.UserInfoEntity;
 import com.csf.whoami.repository.RolesRepository;
 import com.csf.whoami.repository.UserInfoRepository;
@@ -42,10 +44,10 @@ public class UserServiceImpl implements UserService {
 	public UserDTO signUp(UserDTO user) {
 		String userId = StringUtils.generateUUID();
 		// Add new User.
-		UserEntity userEntity = convertAdapter.userDtoToUserEntityConvert(user);
+		UserEntityHT userEntity = convertAdapter.userDtoToUserEntityConvert(user);
 
 		userEntity.setUserId(userId);
-		UserEntity result = userRepository.save(userEntity);
+		UserEntityHT result = userRepository.save(userEntity);
 		if (result != null) {
 			convertAdapter.userEntityToUserDtoConvert(result, user);
 		}
@@ -68,13 +70,24 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDTO findById(String id) {
-		return null;
+		Optional<UserEntityHT> user = userRepository.findById(id);
+		if (!user.isPresent()) {
+			return null;
+		}
+		UserDTO dto = new UserDTO();
+		convertAdapter.userEntityToUserDtoConvert(user.get(), dto);
+		return dto;
 	}
 
 	@Override
 	public UserDTO findByUsername(String userName) {
-		// TODO Auto-generated method stub
-		return null;
+		UserEntityHT user = userRepository.findByUserName(userName);
+		if (user != null) {
+			return null;
+		}
+		UserDTO dto = new UserDTO();
+		convertAdapter.userEntityToUserDtoConvert(user, dto);
+		return dto;
 	}
 
 	@Override

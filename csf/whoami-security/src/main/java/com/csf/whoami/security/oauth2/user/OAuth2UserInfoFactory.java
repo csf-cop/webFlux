@@ -1,7 +1,7 @@
-package com.csf.whoami.oauth2.user;
+package com.csf.whoami.security.oauth2.user;
 
 import com.csf.whoami.exception.OAuth2AuthenticationProcessingException;
-import com.whoami.common.utilities.AuthProvider;
+import com.csf.whoami.model.AuthProvider;
 
 import java.util.Map;
 

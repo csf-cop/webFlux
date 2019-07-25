@@ -1,4 +1,4 @@
-package com.csf.whoami.oauth2.user;
+package com.csf.whoami.security.oauth2.user;
 
 import java.util.Map;
 
@@ -22,8 +22,7 @@ public class FacebookOAuth2UserInfo extends OAuth2UserInfo {
         return (String) attributes.get("email");
     }
 
-    @SuppressWarnings("unchecked")
-	@Override
+    @Override
     public String getImageUrl() {
         if(attributes.containsKey("picture")) {
             Map<String, Object> pictureObj = (Map<String, Object>) attributes.get("picture");

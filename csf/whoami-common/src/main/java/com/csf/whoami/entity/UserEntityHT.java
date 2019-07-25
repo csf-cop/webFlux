@@ -21,7 +21,7 @@ import org.hibernate.annotations.Where;
 @Table(name = "H01DT_USERS", uniqueConstraints = { @UniqueConstraint(columnNames = "user_name") })
 @Where(clause = "delflg = 0")
 @SQLDelete(sql = "UPDATE H01DT_USERS SET delflg = 1 WHERE user_id = ?")
-public class UserEntity extends BaseEntity {
+public class UserEntityHT extends BaseEntity {
 
 	/**
 	 * 

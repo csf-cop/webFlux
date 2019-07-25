@@ -1,4 +1,4 @@
-package com.csf.whoami.oauth2.user;
+package com.csf.whoami.security.oauth2.user;
 
 import java.util.Map;
 
