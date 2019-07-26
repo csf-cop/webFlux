@@ -22,7 +22,7 @@ import com.csf.whoami.domain.AuthResponseDomain;
 import com.csf.whoami.domain.LoginRequestDomain;
 import com.csf.whoami.domain.SignUpRequestDomain;
 import com.csf.whoami.entity.AuthProvider;
-import com.csf.whoami.entity.UserEntity;
+import com.csf.whoami.entity.UsersEntity;
 import com.csf.whoami.exception.BadRequestException;
 import com.csf.whoami.security.TokenProvider;
 import com.csf.whoami.service.UserService;
@@ -72,14 +72,14 @@ public class AuthController {
 		}
 
 		// Creating user's account
-		UserEntity user = new UserEntity();
+		UsersEntity user = new UsersEntity();
 		user.setId(StringUtils.generateUUID());
 		user.setName(signUpRequest.getName());
 		user.setEmail(signUpRequest.getEmail());
 		user.setPassword(signUpRequest.getPassword());
 		user.setProvider(AuthProvider.local);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		UserEntity result = userService.save(user);
+		UsersEntity result = userService.save(user);
 
 		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/me")
 				.buildAndExpand(result.getId()).toUri();

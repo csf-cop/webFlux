@@ -5,7 +5,7 @@ package com.csf.whoami.service;
 
 import java.util.Optional;
 
-import com.csf.whoami.entity.UserEntity;
+import com.csf.whoami.entity.UsersEntity;
 
 /**
  * @author mba0051
@@ -13,12 +13,12 @@ import com.csf.whoami.entity.UserEntity;
  */
 public interface UserService {
 
-	UserEntity save(UserEntity user);
+	UsersEntity save(UsersEntity user);
 
 	boolean existsByEmail(String email);
 
-	Optional<UserEntity> findById(String id);
+	Optional<UsersEntity> findById(String id);
 
-	Optional<UserEntity> findByUsername(String username);
+	Optional<UsersEntity> findByUsername(String username);
 
 }

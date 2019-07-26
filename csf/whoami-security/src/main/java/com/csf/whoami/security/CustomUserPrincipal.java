@@ -10,9 +10,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import com.csf.whoami.entity.UserEntity;
+import com.csf.whoami.entity.UsersEntity;
 
-public class UserPrincipal implements OAuth2User, UserDetails {
+public class CustomUserPrincipal implements OAuth2User, UserDetails {
 
 	/**
 	 * 
@@ -24,21 +24,21 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 	private Collection<? extends GrantedAuthority> authorities;
 	private Map<String, Object> attributes;
 
-	public UserPrincipal(String id, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+	public CustomUserPrincipal(String id, String email, String password, Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.authorities = authorities;
 	}
 
-	public static UserPrincipal create(UserEntity user) {
+	public static CustomUserPrincipal create(UsersEntity user) {
 		List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
 
-		return new UserPrincipal(user.getId(), user.getEmail(), user.getPassword(), authorities);
+		return new CustomUserPrincipal(user.getId(), user.getEmail(), user.getPassword(), authorities);
 	}
 
-	public static UserPrincipal create(UserEntity user, Map<String, Object> attributes) {
-		UserPrincipal userPrincipal = UserPrincipal.create(user);
+	public static CustomUserPrincipal create(UsersEntity user, Map<String, Object> attributes) {
+		CustomUserPrincipal userPrincipal = CustomUserPrincipal.create(user);
 		userPrincipal.setAttributes(attributes);
 		return userPrincipal;
 	}

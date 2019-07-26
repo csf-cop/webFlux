@@ -1,23 +1,36 @@
 package com.csf.whoami.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "H01DT_USERS", uniqueConstraints = { @UniqueConstraint(columnNames = "email") })
-public class UserEntity {
+@Where(clause = "delflg = 0")
+@SQLDelete(sql = "UPDATE H01DT_USERS SET delflg = 1 WHERE userid = ?")
+public class UsersEntity extends BaseEntity {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
+	@Column(nullable = false, name = "user_id")
 	private String id;
 
 	@Column(nullable = false)
@@ -40,6 +53,25 @@ public class UserEntity {
 	private AuthProvider provider;
 
 	private String providerId;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "H04DT_USER_ROLE", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "role_id") })
+	private Set<RolesEntity> roles;
+
+	/**
+	 * @return the roles
+	 */
+	public Set<RolesEntity> getRoles() {
+		return roles;
+	}
+
+	/**
+	 * @param roles the roles to set
+	 */
+	public void setRoles(Set<RolesEntity> roles) {
+		this.roles = roles;
+	}
 
 	/**
 	 * @return the id

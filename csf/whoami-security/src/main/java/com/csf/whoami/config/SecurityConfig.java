@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.csf.whoami.security.CustomUserDetailsService;
 import com.csf.whoami.security.RestAuthenticationEntryPoint;
-import com.csf.whoami.security.TokenAuthenticationFilter;
+import com.csf.whoami.security.CustomTokenAuthenticationFilter;
 import com.csf.whoami.security.oauth2.CustomOAuth2UserService;
 import com.csf.whoami.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.csf.whoami.security.oauth2.OAuth2AuthenticationFailureHandler;
@@ -48,8 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    private HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
     @Bean
-    public TokenAuthenticationFilter tokenAuthenticationFilter() {
-        return new TokenAuthenticationFilter();
+    public CustomTokenAuthenticationFilter tokenAuthenticationFilter() {
+        return new CustomTokenAuthenticationFilter();
     }
 
     /*

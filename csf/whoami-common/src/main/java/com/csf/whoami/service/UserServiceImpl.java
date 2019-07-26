@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.csf.whoami.entity.UserEntity;
+import com.csf.whoami.entity.UsersEntity;
 import com.csf.whoami.repository.UserRepository;
 
 /**
@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
 	@Override
-	public UserEntity save(UserEntity user) {
+	public UsersEntity save(UsersEntity user) {
 		return userRepository.save(user);
 	}
 
@@ -31,12 +31,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Optional<UserEntity> findById(String userId) {
+	public Optional<UsersEntity> findById(String userId) {
 		return userRepository.findById(userId);
 	}
 
 	@Override
-	public Optional<UserEntity> findByUsername(String username) {
+	public Optional<UsersEntity> findByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
 }

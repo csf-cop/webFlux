@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.csf.whoami.entity.AuthProvider;
-import com.csf.whoami.entity.UserEntity;
+import com.csf.whoami.entity.UsersEntity;
 import com.csf.whoami.exception.OAuth2AuthenticationProcessingException;
-import com.csf.whoami.security.UserPrincipal;
+import com.csf.whoami.security.CustomUserPrincipal;
 import com.csf.whoami.security.oauth2.user.OAuth2UserInfo;
 import com.csf.whoami.security.oauth2.user.OAuth2UserInfoFactory;
 import com.csf.whoami.service.UserService;
@@ -46,8 +46,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
         }
 
-        Optional<UserEntity> userOptional = userService.findByUsername(oAuth2UserInfo.getEmail());
-        UserEntity user;
+        Optional<UsersEntity> userOptional = userService.findByUsername(oAuth2UserInfo.getEmail());
+        UsersEntity user;
         if(userOptional.isPresent()) {
             user = userOptional.get();
             if(!user.getProvider().equals(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
@@ -60,11 +60,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             user = registerNewUser(oAuth2UserRequest, oAuth2UserInfo);
         }
 
-        return UserPrincipal.create(user, oAuth2User.getAttributes());
+        return CustomUserPrincipal.create(user, oAuth2User.getAttributes());
     }
 
-    private UserEntity registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
-        UserEntity user = new UserEntity();
+    private UsersEntity registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
+        UsersEntity user = new UsersEntity();
 
         user.setProvider(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()));
         user.setProviderId(oAuth2UserInfo.getId());
@@ -74,7 +74,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         return userService.save(user);
     }
 
-    private UserEntity updateExistingUser(UserEntity existingUser, OAuth2UserInfo oAuth2UserInfo) {
+    private UsersEntity updateExistingUser(UsersEntity existingUser, OAuth2UserInfo oAuth2UserInfo) {
         existingUser.setName(oAuth2UserInfo.getName());
         existingUser.setImageUrl(oAuth2UserInfo.getImageUrl());
         return userService.save(existingUser);

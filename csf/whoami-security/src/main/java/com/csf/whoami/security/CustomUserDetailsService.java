@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.csf.whoami.entity.UserEntity;
+import com.csf.whoami.entity.UsersEntity;
 import com.csf.whoami.exception.ResourceNotFoundException;
 import com.csf.whoami.service.UserService;
 
@@ -26,19 +26,19 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
-        UserEntity user = service.findByUsername(username)
+        UsersEntity user = service.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + username)
         );
 
-        return UserPrincipal.create(user);
+        return CustomUserPrincipal.create(user);
     }
 
     @Transactional
     public UserDetails loadUserById(String id) {
-        UserEntity user = service.findById(id).orElseThrow(
+        UsersEntity user = service.findById(id).orElseThrow(
             () -> new ResourceNotFoundException("User", "id", id)
         );
 
-        return UserPrincipal.create(user);
+        return CustomUserPrincipal.create(user);
     }
 }
