@@ -17,71 +17,74 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.csf.whoami.domain.ApiResponse;
-import com.csf.whoami.domain.AuthResponse;
-import com.csf.whoami.domain.LoginRequest;
-import com.csf.whoami.domain.SignUpRequest;
-import com.csf.whoami.domain.UserDTO;
+import com.csf.whoami.domain.ApiResponseDomain;
+import com.csf.whoami.domain.AuthResponseDomain;
+import com.csf.whoami.domain.LoginRequestDomain;
+import com.csf.whoami.domain.SignUpRequestDomain;
+import com.csf.whoami.entity.AuthProvider;
+import com.csf.whoami.entity.UsersEntity;
 import com.csf.whoami.exception.BadRequestException;
 import com.csf.whoami.security.TokenProvider;
 import com.csf.whoami.service.UserService;
-import com.whoami.common.utilities.AuthProvider;
+import com.whoami.common.utilities.StringUtils;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+	@Autowired
+	private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private TokenProvider tokenProvider;
+	@Autowired
+	private TokenProvider tokenProvider;
 
-    @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+	@PostMapping("/login")
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequestDomain loginRequest) {
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getEmail(),
-                        loginRequest.getPassword()
-                )
-        );
+		String username = null;
+		if (StringUtils.isValidString(loginRequest.getUsername())) {
+			username = StringUtils.trim(loginRequest.getUsername());
+		} else if (StringUtils.isValidString(loginRequest.getEmail())) {
+			username = StringUtils.trim(loginRequest.getEmail());
+		} else if (StringUtils.isValidString(loginRequest.getPhoneNumber())) {
+			username = StringUtils.trim(loginRequest.getPhoneNumber());
+		}
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+		Authentication authentication = authenticationManager
+				.authenticate(new UsernamePasswordAuthenticationToken(username, loginRequest.getPassword()));
 
-        String token = tokenProvider.createToken(authentication);
-        return ResponseEntity.ok(new AuthResponse(token));
-    }
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 
-    @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if(userService.existsByEmail(signUpRequest.getEmail())) {
-            throw new BadRequestException("Email address already in use.");
-        }
+		String token = tokenProvider.createToken(authentication);
+		return ResponseEntity.ok(new AuthResponseDomain(token));
+	}
 
-        // Creating user's account
-        UserDTO user = new UserDTO();
-        user.setUserName(signUpRequest.getName());
-        user.setEmail(signUpRequest.getEmail());
-        user.setPassword(signUpRequest.getPassword());
-        user.setProvider(AuthProvider.local);
+	@PostMapping("/signup")
+	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequestDomain signUpRequest) {
+		if (userService.existsByEmail(signUpRequest.getEmail())) {
+			throw new BadRequestException("Email address already in use.");
+		}
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+		// Creating user's account
+		UsersEntity user = new UsersEntity();
+		user.setId(StringUtils.generateUUID());
+		user.setName(signUpRequest.getName());
+		user.setEmail(signUpRequest.getEmail());
+		user.setPassword(signUpRequest.getPassword());
+		user.setProvider(AuthProvider.local);
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		UsersEntity result = userService.save(user);
 
-        UserDTO result = userService.signUp(user);
+		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/me")
+				.buildAndExpand(result.getId()).toUri();
 
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/user/me")
-                .buildAndExpand(result.getUserId()).toUri();
-
-        return ResponseEntity.created(location)
-                .body(new ApiResponse(true, "User registered successfully."));
-    }
+		return ResponseEntity.created(location).body(new ApiResponseDomain(true, "User registered successfully@"));
+	}
 
 }

@@ -16,9 +16,9 @@ import org.hibernate.annotations.Where;
  *
  */
 @Entity
-@Table(name = "H05DT_GROUP")
+@Table(name = "H06DT_USER_GROUP")
 @Where(clause = "delflg = 0")
-@SQLDelete(sql = "UPDATE H05DT_GROUP SET delflg = 1 WHERE user_id = ?")
+@SQLDelete(sql = "UPDATE H06DT_USER_GROUP SET delflg = 1 WHERE user_id = ?")
 public class UserGroupEntity extends BaseEntity {
 
 	/**
@@ -27,6 +27,7 @@ public class UserGroupEntity extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name = "user_group_id")
 	private String id;
 
 	@Column(name = "user_id")

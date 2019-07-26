@@ -8,7 +8,7 @@ spring:
     jpa:
         show-sql: true
         hibernate:
-            ddl-auto: create-drop
+            ddl-auto: none
             naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
         properties:
             hibernate:
@@ -63,3 +63,22 @@ server:
   #  key-store-password: password
   #  key-store-type: PKCS12
   #  key-alias: key-tomcat
+
+ # log server tomcat
+  tomcat:
+    accesslog:
+      enabled: true
+      suffix: .log
+      prefix: tomcat_log
+      file-date-format: .yyyy-MM-dd
+      directory: 
+      pattern: common
+    basedir: ./logs/tomcat
+
+logging:
+  level:
+    root: INFO
+#path file log
+  path: ./logs
+#file name
+  file: whoami

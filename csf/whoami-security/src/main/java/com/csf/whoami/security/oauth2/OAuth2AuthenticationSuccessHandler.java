@@ -3,7 +3,7 @@ package com.csf.whoami.security.oauth2;
 import com.csf.whoami.config.AppProperties;
 import com.csf.whoami.exception.BadRequestException;
 import com.csf.whoami.security.TokenProvider;
-import com.csf.whoami.util.CookieUtils;
+import com.csf.whoami.utils.CookieUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

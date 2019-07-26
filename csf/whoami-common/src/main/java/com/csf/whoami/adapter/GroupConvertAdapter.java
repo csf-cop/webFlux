@@ -3,7 +3,7 @@
  */
 package com.csf.whoami.adapter;
 
-import com.csf.whoami.domain.GroupDTO;
+import com.csf.whoami.domain.GroupDomain;
 import com.csf.whoami.entity.GroupEntity;
 
 /**
@@ -11,5 +11,5 @@ import com.csf.whoami.entity.GroupEntity;
  *
  */
 public interface GroupConvertAdapter {
-	GroupDTO groupEntityToGroupDtoConvert(GroupEntity group);
+	GroupDomain groupEntityToGroupDtoConvert(GroupEntity group);
 }

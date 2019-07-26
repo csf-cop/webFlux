@@ -3,15 +3,17 @@
  */
 package com.csf.whoami.entity;
 
-import java.sql.Timestamp;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 /**
@@ -19,116 +21,122 @@ import org.hibernate.annotations.Where;
  *
  */
 @Entity
-@Table(name = "H03DT_ROLES", uniqueConstraints = { @UniqueConstraint(columnNames = "role_name") })
+@Table(name = "S02ST_ROLE")
 @Where(clause = "delflg = 0")
-@SQLDelete(sql = "UPDATE H03DT_ROLES SET delflg = 1 WHERE role_id = ?")
 public class RolesEntity extends BaseEntity {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "role_id")
-	private String roleId;
+	private String id;
 
-	@Column(name = "role_name")
-	private String roleName;
+	@Column(name = "role_name", nullable = false, length = 100)
+	private String name;
 
-	@Column(name = "role_note")
-	private String roleNote;
+	@Column(name = "role_code", nullable = false, length = 20)
+	private String code;
 
-	@Column(name = "create_date")
-	private Timestamp createDate;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "s04st_user_roles", joinColumns = { @JoinColumn(name = "role_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "user_id") })
+	private Set<UsersEntity> users;
 
-	@Column(name = "updated_date")
-	private Timestamp updatedDate;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "s05st_role_authorities", joinColumns = { @JoinColumn(name = "role_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "authority_id") })
+	private Set<AuthorityEntity> authorities;
 
-	@Column(name = "update_by")
-	private String updateBy;
-
-	/**
-	 * @return the roleId
-	 */
-	public String getRoleId() {
-		return roleId;
+	public RolesEntity() {
+		// No-op
 	}
 
 	/**
-	 * @param roleId the roleId to set
+	 * @return the id
 	 */
-	public void setRoleId(String roleId) {
-		this.roleId = roleId;
+	public String getId() {
+		return id;
 	}
 
 	/**
-	 * @return the roleName
+	 * @param id the id to set
 	 */
-	public String getRoleName() {
-		return roleName;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	/**
-	 * @param roleName the roleName to set
+	 * Getter for property 'name'.
+	 *
+	 * @return Value for property 'name'.
 	 */
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public String getName() {
+		return name;
 	}
 
 	/**
-	 * @return the roleNote
+	 * Setter for property 'name'.
+	 *
+	 * @param name Value to set for property 'name'.
 	 */
-	public String getRoleNote() {
-		return roleNote;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
-	 * @param roleNote the roleNote to set
+	 * Getter for property 'code'.
+	 *
+	 * @return Value for property 'code'.
 	 */
-	public void setRoleNote(String roleNote) {
-		this.roleNote = roleNote;
+	public String getCode() {
+		return code;
 	}
 
 	/**
-	 * @return the createDate
+	 * Setter for property 'code'.
+	 *
+	 * @param code Value to set for property 'code'.
 	 */
-	public Timestamp getCreateDate() {
-		return createDate;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	/**
-	 * @param createDate the createDate to set
+	 * Gets authorities.
+	 *
+	 * @return the authorities
 	 */
-	public void setCreateDate(Timestamp createDate) {
-		this.createDate = createDate;
+	public Set<AuthorityEntity> getAuthorities() {
+		return authorities;
 	}
 
 	/**
-	 * @return the updatedDate
+	 * Sets authorities.
+	 *
+	 * @param authorities the authorities
 	 */
-	public Timestamp getUpdatedDate() {
-		return updatedDate;
+	public void setAuthorities(Set<AuthorityEntity> authorities) {
+		this.authorities = authorities;
 	}
 
 	/**
-	 * @param updatedDate the updatedDate to set
+	 * Gets users.
+	 *
+	 * @return the users
 	 */
-	public void setUpdatedDate(Timestamp updatedDate) {
-		this.updatedDate = updatedDate;
+	public Set<UsersEntity> getUsers() {
+		return users;
 	}
 
 	/**
-	 * @return the updateBy
+	 * Sets users.
+	 *
+	 * @param users the users
 	 */
-	public String getUpdateBy() {
-		return updateBy;
-	}
-
-	/**
-	 * @param updateBy the updateBy to set
-	 */
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
+	public void setUsers(Set<UsersEntity> users) {
+		this.users = users;
 	}
 }

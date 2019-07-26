@@ -18,7 +18,7 @@ import org.hibernate.annotations.Where;
 @Entity
 @Table(name = "H04DT_USER_ROLE")
 @Where(clause = "delflg = 0")
-@SQLDelete(sql = "UPDATE H05DT_GROUP SET delflg = 1 WHERE user_id = ?")
+@SQLDelete(sql = "UPDATE H04DT_USER_ROLE SET delflg = 1 WHERE user_id = ?")
 public class UserRoleEntity extends BaseEntity {
 
 	/**
@@ -27,7 +27,8 @@ public class UserRoleEntity extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String id;
+	@Column(name = "user_role_id")
+	private String userRoleId;
 
 	@Column(name = "user_id")
 	private String userId;
@@ -35,21 +36,18 @@ public class UserRoleEntity extends BaseEntity {
 	@Column(name = "role_id")
 	private String roleId;
 
-	@Column(name = "is_deleted")
-	private Boolean isDeleted;
-
 	/**
-	 * @return the id
+	 * @return the userRoleId
 	 */
-	public String getId() {
-		return id;
+	public String getUserRoleId() {
+		return userRoleId;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param userRoleId the userRoleId to set
 	 */
-	public void setId(String id) {
-		this.id = id;
+	public void setUserRoleId(String userRoleId) {
+		this.userRoleId = userRoleId;
 	}
 
 	/**
