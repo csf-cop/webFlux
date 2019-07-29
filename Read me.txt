@@ -1,0 +1,3 @@
++ csf folder: API core
++ whoami folder: angular project (web)
++ mobile: Create new android project (whoami-adr) and swift project(whoami-swf)

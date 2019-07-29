@@ -1,0 +1,362 @@
+{
+	"info": {
+		"_postman_id": "4e62ea1e-6254-4ed9-ab31-0101f42220e4",
+		"name": "Who Am I",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[ADMIN] Get token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "whoami-secret",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "whoami-client",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "admin1@pm.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin123",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://whoami.website:8080/oauth/token",
+					"protocol": "http",
+					"host": [
+						"whoami",
+						"website"
+					],
+					"port": "8080",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[USER]_Get token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "whoami-client",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "whoami-secret",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "user1@pm.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "user123",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8899/oauth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8899",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Anonymous]_Access hello page",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhos:8080/api/hello/",
+					"protocol": "http",
+					"host": [
+						"localhos"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"hello",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN]_Get token list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "a0a950a7-7973-42df-aeb1-6f6b54cf649f",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/token/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"token",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ADMIN]_Hello page",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "5c348b85-64cf-4bef-9c23-dc5c4c01a315",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:8899/api/hello?name=Sebastian",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8899",
+					"path": [
+						"api",
+						"hello"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Sebastian"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[ANONYMOUS]_Test content",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:8899/api/hello/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8899",
+					"path": [
+						"api",
+						"hello",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[USER]_Delete token",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "cff17fac-4189-4876-aa73-1d6a00e8c3a9",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http:///whoami.website:8080/oauth/revoke",
+					"host": [
+						"http:"
+					],
+					"port": "",
+					"path": [
+						"",
+						"",
+						"whoami.website:8080",
+						"oauth",
+						"revoke"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[USER]_Refresh token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "whoami-client",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "whoami-secret",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "refresh_token",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "8369945d-2d7d-498c-8912-7c6f41ab8059",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http:///whoami.website:8080/oauth/token",
+					"host": [
+						"http:"
+					],
+					"port": "",
+					"path": [
+						"",
+						"",
+						"whoami.website:8080",
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
